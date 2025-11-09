@@ -22,6 +22,10 @@ header {
     margin-bottom: 30px;
 }
 
+.center-text {
+  text-align: center;
+}
+
 h1 {
     margin-bottom: 1rem;
 }
