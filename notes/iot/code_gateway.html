@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码文档 - 物联网学习</title>
+    <!-- 复用原有第三方CDN（保证风格/版本统一） -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+    <style>
+        /* 保持与原有页面风格统一 */
+        :root {
+            --primary-color: #007bff;
+            --primary-hover: #0056b3;
+            --bg-color: #fff;
+            --text-color: #333;
+            --card-bg: #f8f9fa;
+            --border-color: #eee;
+        }
+        .dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --card-bg: #2d2d2d;
+            --border-color: #3d3d3d;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+        }
+        header {
+            padding: 15px 30px;
+            background: var(--card-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        nav a.active {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .mode-btn {
+            padding: 6px 12px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .mode-btn:hover {
+            background: var(--primary-hover);
+        }
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .md-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        /* Markdown渲染样式优化 */
+        .md-content h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .md-content h2 {
+            font-size: 1.6em;
+            margin: 25px 0 15px;
+            color: var(--primary-color);
+        }
+        .md-content h3 {
+            font-size: 1.3em;
+            margin: 20px 0 10px;
+        }
+        .md-content p {
+            margin: 15px 0;
+        }
+        .md-content pre {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .md-content code {
+            padding: 2px 4px;
+            background: #eee;
+            border-radius: 4px;
+            font-family: "Consolas", monospace;
+        }
+        .md-content pre code {
+            background: none;
+            padding: 0;
+        }
+        .md-content ul, .md-content ol {
+            margin: 15px 0 15px 30px;
+        }
+        .md-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--card-bg);
+            margin-top: 60px;
+        }
+        /* 回到原页面按钮 */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .back-btn:hover {
+            background: var(--primary-hover);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div>
+                <a href="../../index.html">首页</a>
+                <a href="index.html" class="active">物联网学习</a>
+                <a href="../../blogs.html">博客</a>
+            </div>
+            <button class="mode-btn" id="modeBtn">🌙 暗黑模式</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 回到原学习页面按钮 -->
+        <a href="index.html" class="back-btn">← 回到物联网学习页面</a>
+        
+        <!-- Markdown内容渲染容器 -->
+        <div class="md-content" id="mdContainer"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 GUKAIYUAN.ASIA | 代码文档展示</p>
+    </footer>
+
+    <script>
+        // 1. 暗黑模式切换（与原有页面保持一致，支持本地记忆）
+        const modeBtn = document.getElementById('modeBtn');
+        const body = document.body;
+
+        // 初始化暗黑模式
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            modeBtn.textContent = "☀️ 亮色模式";
+        }
+
+        // 切换暗黑模式
+        modeBtn.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+                modeBtn.textContent = "🌙 暗黑模式";
+            } else {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+                modeBtn.textContent = "☀️ 亮色模式";
+            }
+        });
+
+        // 2. 从URL参数中获取MD文件路径
+        function getMdFilePath() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('file'); // 获取?file=xxx中的路径
+        }
+
+        // 3. 加载并解析Markdown文件
+        async function renderMarkdown() {
+            const mdFilePath = getMdFilePath();
+            const mdContainer = document.getElementById('mdContainer');
+
+            // 校验MD文件路径是否存在
+            if (!mdFilePath) {
+                mdContainer.innerHTML = '<h2>错误：未指定代码文档路径</h2>';
+                return;
+            }
+
+            try {
+                // 加载MD文件内容
+                const response = await fetch(mdFilePath);
+                if (!response.ok) {
+                    throw new Error(`无法加载文件：${response.status}`);
+                }
+                const mdContent = await response.text();
+
+                // 配置marked.js，启用代码高亮
+                marked.setOptions({
+                    highlight: function(code, lang) {
+                        if (lang && hljs.getLanguage(lang)) {
+                            // 有指定语言，高亮对应代码
+                            return hljs.highlight(code, { language: lang }).value;
+                        } else {
+                            // 无指定语言，自动识别高亮
+                            return hljs.highlightAuto(code).value;
+                        }
+                    },
+                    breaks: true, // 支持换行符
+                    gfm: true // 支持GitHub Flavored Markdown
+                });
+
+                // 解析MD内容为HTML并插入页面
+                const htmlContent = marked.parse(mdContent);
+                mdContainer.innerHTML = htmlContent;
+
+                // 额外高亮（防止部分代码未被解析）
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            } catch (error) {
+                mdContainer.innerHTML = `<h2>错误：加载代码文档失败</h2><p>${error.message}</p>`;
+                console.error('MD加载失败：', error);
+            }
+        }
+
+        // 页面加载完成后，渲染Markdown
+        window.addEventListener('DOMContentLoaded', renderMarkdown);
+    </script>
+</body>
+</html>
