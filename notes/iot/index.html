@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>物联网学习记录 | GUKAIYUAN.ASIA</title>
   <!-- 复用现有样式 -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../css/style.css">
   <style>
     /* 仅在此页面新增的专属样式（不污染全局） */
     .iot-container {
@@ -330,7 +330,7 @@
           <h3 id="chapter1-1">1.1 物联网定义与核心特征</h3>
           <p>物联网（Internet of Things, IoT）是指通过信息传感设备，将任何物品与互联网相连接，进行信息交换和通信，以实现智能化识别、定位、跟踪、监控和管理的一种网络。</p>
           <p>核心特征：**万物互联**、**数据驱动**、**智能交互**。</p>
-          <img src="images/iot-arch.png" alt="物联网三层架构示意图">
+          <img src="../../pictures/sensors_data.png" loading="lazy" alt="物联网三层架构示意图">
 
           <h3 id="chapter1-2">1.2 典型架构（感知层/网络层/应用层）</h3>
           <p>物联网标准架构分为三层：</p>
@@ -346,7 +346,7 @@
           <h2>第二章：通信协议与网络</h2>
           <h3 id="chapter2-1">2.1 短距离通信（WiFi/Bluetooth/Zigbee）</h3>
           <p>短距离通信技术适用于室内/小范围设备互联，不同协议的适用场景不同：</p>
-          <img src="images/iot-protocol.png" alt="物联网短距离协议对比">
+          <img src="../../pictures/sensors_data.png" loading="lazy" alt="物联网短距离协议对比">
           <p>WiFi：带宽高、功耗高，适用于家庭智能设备；Bluetooth：低功耗、短距，适用于可穿戴设备；Zigbee：低功耗、自组网，适用于工业传感器网络。</p>
 
           <h3 id="chapter2-2">2.2 广域网通信（NB-IoT/LoRa/5G）</h3>
@@ -367,7 +367,7 @@
             <li>STM32：性能稳定、外设丰富，适用于工业级、高精度需求项目</li>
             <li>ESP32：内置WiFi/Bluetooth，开发便捷，适用于民用、低成本智能设备</li>
           </ul>
-          <img src="images/esp32-stm32.png" alt="STM32与ESP32开发板对比">
+          <img src="../../pictures/sensors_data.png" loading="lazy" alt="STM32与ESP32开发板对比">
 
           <h3 id="chapter3-2">3.2 传感器数据采集与上传</h3>
           <p>传感器数据采集的核心流程为：传感器感知环境数据 → 开发板读取数据 → 协议封装 → 上传至网关/云端。</p>
@@ -397,19 +397,19 @@
           <h3 id="chapter4-1">4.1 项目概况与目标</h3>
           <p>依托物联网与AI技术发展趋势，聚焦家居环境智能化，旨在通过技术手段提升生活便捷性、舒适性与安全性。</p>
           <p>核心目标：构建基于ZigBee与TCP/IP协议的智能家居系统，实现温湿度/光照等环境参数实时采集监控、灯光/窗帘等设备远程智能控制，以及数据上云与可视化展示、历史数据查询。</p>
-          <img src="images/smart-home-overview.png" alt="智能家居项目整体概况">
+          <img src="../../pictures/ui-interface.png" loading="lazy" alt="智能家居项目整体概况">
 
           <h3 id="chapter4-2">4.2 软硬件环境支撑</h3>
           <p>开发环境与工具链：以Windows 11为宿主系统，通过VMware Workstation Pro 17虚拟化RedHat 5、Ubuntu
             16/18系统；代码编写用VSCode/Vim，编译用GCC/ARM-Linux-GCC，调试与传输用Putty/SecureCRT、WinSCP。</p>
           <p>核心硬件：中软物联网实验箱（CC2530传感器节点、ARM/Linux智能网关）。</p>
           <p>软件平台：新大陆物联网云平台，支持设备全生命周期管理、数据存储与可视化、远程指令下发。</p>
-          <img src="images/smart-home-hardware.png" alt="智能家居项目软硬件平台">
+          <img src="../../pictures/ui-interface.png" loading="lazy" alt="智能家居项目软硬件平台">
 
           <h3 id="chapter4-3">4.3 系统设计与成果</h3>
           <p>总体架构采用四层架构：感知层、网络层、平台层、应用层。</p>
           <p>核心成果：网关程序多线程并发架构稳定运行，PC客户端能实时展示UDP广播数据，云平台成功接收上传数据并生成温湿度变化曲线，支持历史数据查询。</p>
-          <img src="../../pictures/ui界面.png" alt="智能家居项目成果展示">
+          <img src="../../pictures/ui-interface.png" loading="lazy" alt="智能家居项目成果展示">
 
           <h3 id="chapter4-4">4.4 总结与未来展望</h3>
           <p>项目成功搭建基于中软物联网实验箱与新大陆云平台的智能家居系统，实现全部核心功能，系统运行稳定。技术收获：掌握物联网系统全流程设计与开发、C语言QT编程、UDP/TCP网络编程、嵌入式Linux环境搭建等。</p>
@@ -425,7 +425,6 @@
   </footer>
 
   <!-- 交互脚本 -->
-  <script src="js/app.js"></script>
   <script>
     const sidebar = document.querySelector('.iot-sidebar');
     const iotContainer = document.querySelector('.iot-container');
@@ -438,8 +437,8 @@
       sidebar.classList.toggle('collapsed');
       iotContainer.classList.toggle('collapsed');
       const isCollapsed = sidebar.classList.contains('collapsed');
-      sidebarInnerBtn.textContent = isCollapsed ? '收起' : '收起';
-      sidebarMiniBtn.textContent = isCollapsed ? '展开' : '展开';
+      sidebarInnerBtn.textContent = isCollapsed ? '展开' : '收起';
+      sidebarMiniBtn.textContent = isCollapsed ? '展开' : '收起';
       if (window.innerWidth > 768) {
         sidebar.classList.remove('active');
       }
@@ -507,3 +506,4 @@
 </body>
 
 </html>
+

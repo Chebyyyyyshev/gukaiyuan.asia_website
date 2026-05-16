@@ -1,49 +1,51 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>联系 - 技术空间</title>
+    <meta name="description" content="联系博主、提交反馈与合作沟通入口。">
     <link rel="stylesheet" href="css/style.css">
-    <!-- 第三方CDN(必须，全局通用) -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </head>
 <body>
-    <!-- 阅读进度条 -->
+    <a class="skip-link" href="#main-content">跳转到正文</a>
     <div class="progress-bar"></div>
-    <!-- 回到顶部按钮 -->
-    <div class="back-to-top">↑</div>
+    <button class="back-to-top" type="button" aria-label="回到顶部">↑</button>
 
     <header>
         <h1 class="center-text">技术空间</h1>
-        <nav class="center-text">
+        <nav class="center-text" aria-label="主导航">
             <a href="index.html">关于</a>
             <a href="blogs.html">博客</a>
             <a href="contact.html" class="active">联系</a>
-            <button class="mode-btn">🌙 暗黑模式</button>
+            <button class="mode-btn" type="button">🌙 暗黑模式</button>
         </nav>
     </header>
-    
-    <main>
+
+    <main id="main-content">
         <section id="contact" class="contact-wrap">
             <div class="content-card contact-info">
                 <h2>联系方式</h2>
-                <p>邮箱：your_email@xxx.com</p>
-                <p>GitHub：https://github.com/yourname</p>
-                <p>微信：your_wechat_id</p>
-                <p>正在开发讨论区功能</p>
+                <p>邮箱：your_email@example.com（请替换为真实邮箱）</p>
+                <p>GitHub：<a href="https://github.com/yourname" target="_blank" rel="noopener noreferrer">https://github.com/yourname</a></p>
+                <p>微信：your_wechat_id（建议改为二维码或企业微信）</p>
+                <p>如果你发现文章有问题，欢迎直接指出，我会第一时间修正。</p>
             </div>
-            <!-- 联系表单 -->
+
             <div class="content-card contact-form">
                 <h2>留言反馈</h2>
                 <form id="msg-form">
-                    <input type="text" placeholder="您的昵称" required>
-                    <input type="email" placeholder="您的邮箱" required>
-                    <textarea placeholder="请输入您的留言内容..." rows="5" required></textarea>
+                    <label for="contact-name">称呼</label>
+                    <input id="contact-name" name="name" type="text" placeholder="例如：张三" required>
+
+                    <label for="contact-email">邮箱</label>
+                    <input id="contact-email" name="email" type="email" placeholder="例如：name@example.com" required>
+
+                    <label for="contact-message">留言内容</label>
+                    <textarea id="contact-message" name="message" placeholder="请输入你的建议或问题" rows="5" required></textarea>
+
                     <button type="submit" class="submit-btn">发送留言</button>
+                    <p id="form-status" class="form-status" aria-live="polite"></p>
                 </form>
             </div>
         </section>
@@ -53,6 +55,6 @@
         <p>&copy; 2026 gukaiyuan.asia - 所有权利保留</p>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>

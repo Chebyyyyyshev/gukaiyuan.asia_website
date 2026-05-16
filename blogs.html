@@ -1,75 +1,70 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>博客 - 技术空间</title>
+    <meta name="description" content="技术博客列表，包含物联网专题与前端开发文章。">
     <link rel="stylesheet" href="css/style.css">
-    <!-- 第三方CDN(必须，用于MD解析+代码高亮，仅引用无下载) -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js" defer></script>
 </head>
 <body>
-    <!-- 阅读进度条 -->
+    <a class="skip-link" href="#main-content">跳转到正文</a>
     <div class="progress-bar"></div>
-    <!-- 回到顶部按钮 -->
-    <div class="back-to-top">↑</div>
+    <button class="back-to-top" type="button" aria-label="回到顶部">↑</button>
 
     <header>
         <h1 class="center-text">技术空间</h1>
-        <nav class="center-text">
+        <nav class="center-text" aria-label="主导航">
             <a href="index.html">关于</a>
             <a href="blogs.html" class="active">博客</a>
             <a href="contact.html">联系</a>
-            <button class="mode-btn">🌙 暗黑模式</button>
+            <button class="mode-btn" type="button">🌙 暗黑模式</button>
         </nav>
     </header>
-    
-    <main>
-        <section id="article-list">
-            <h2 class="center-text">文章精选</h2>
-            <!-- 文章搜索框 -->
+
+    <main id="main-content">
+        <section id="article-list" aria-labelledby="article-list-title">
+            <h2 id="article-list-title" class="center-text">文章精选</h2>
             <div class="search-box">
-                <input type="text" placeholder="输入关键词搜索文章标题/简介..." id="article-search">
+                <label for="article-search" class="center-text" style="display:block;margin-bottom:8px;">搜索文章</label>
+                <input type="text" placeholder="输入关键词搜索标题或简介" id="article-search" autocomplete="off">
             </div>
-            <!-- 文章卡片列表 -->
+
             <div class="article-cards">
-                <!-- 文章0 记录物联网学习记录 -->
-                <div class="article-card">
+                <article class="article-card">
                     <h3>物联网学习记录</h3>
                     <div class="article-meta">发布时间：2026-02-04 | 分类：物联网</div>
-                    <p>利用网络编程，包括udp、tcp等协议的使用和实现；包含qt编程，自制ui界面</p>
+                    <p>从通信协议、嵌入式开发到智能家居项目，整理一条完整的物联网学习路径。</p>
                     <a class="read-btn" href="notes/iot/index.html">进入专题</a>
+                </article>
 
-                </div>
-                
-                <!-- 文章1 你复制这个卡片即可添加自己的文章 -->
-                <div class="article-card">
-                    <h3>JavaScript 异步编程全解析（测试用）</h3>
+                <article class="article-card">
+                    <h3>JavaScript 异步编程全解</h3>
                     <div class="article-meta">发布时间：2026-01-16 | 分类：前端技术</div>
-                    <p>详解JS异步编程从回调地狱到Promise、async/await的演进，附带实战案例和代码解析。</p>
-                    <button class="read-btn" data-md="md/article1.md">阅读全文</button>
-                </div>
-                <!-- 文章2 -->
-                <div class="article-card">
-                    <h3>CSS3 高级布局与动效技巧（测试用）</h3>
-                    <div class="article-meta">发布时间：2026-01-10 | 分类：CSS进阶</div>
-                    <p>Grid+Flex组合布局实战，解决移动端适配、居中对齐等问题，还有创意渐变与过渡动效。</p>
-                    <button class="read-btn" data-md="md/article2.md">阅读全文</button>
-                </div>
-                <!-- 文章3 -->
-                <div class="article-card">
-                    <h3>HTML5 语义化与SEO优化指南（测试用）</h3>
+                    <p>从回调到 Promise、再到 async/await，结合示例代码理解异步模型与错误处理。</p>
+                    <button class="read-btn" type="button" data-md="md/article1.md">阅读全文</button>
+                </article>
+
+                <article class="article-card">
+                    <h3>CSS3 布局与动效实践</h3>
+                    <div class="article-meta">发布时间：2026-01-10 | 分类：CSS</div>
+                    <p>通过 Grid/Flex 的组合布局和动效策略，解决移动端适配、信息层级和交互反馈。</p>
+                    <button class="read-btn" type="button" data-md="md/article2.md">阅读全文</button>
+                </article>
+
+                <article class="article-card">
+                    <h3>HTML5 语义化与 SEO 基础</h3>
                     <div class="article-meta">发布时间：2026-01-05 | 分类：前端基础</div>
-                    <p>为什么要使用语义化标签？语义化对SEO的影响，构建标准的HTML5页面结构。</p>
-                    <button class="read-btn" data-md="md/article3.md">阅读全文</button>
-                </div>
+                    <p>梳理语义化标签、标题结构和描述信息对搜索可见性的影响与实践细节。</p>
+                    <button class="read-btn" type="button" data-md="md/article3.md">阅读全文</button>
+                </article>
             </div>
 
-            <!-- Markdown文章渲染区域 -->
-            <div class="markdown-content"></div>
+            <div class="markdown-content" aria-live="polite"></div>
         </section>
     </main>
 
@@ -77,6 +72,6 @@
         <p>&copy; 2026 gukaiyuan.asia - 所有权利保留</p>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/app.js" defer></script>
 </body>
 </html>

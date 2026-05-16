@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
     <style>
         /* 保持与原有页面风格统一 */
         :root {
@@ -177,33 +178,38 @@
     </footer>
 
     <script>
-        // 1. 暗黑模式切换（与原有页面保持一致，支持本地记忆）
+        // 1. 暗黑模式切换（与主站使用同一存储键）
         const modeBtn = document.getElementById('modeBtn');
         const body = document.body;
+        const THEME_KEY = 'siteMode';
 
-        // 初始化暗黑模式
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            modeBtn.textContent = "☀️ 亮色模式";
+        function syncModeBtnText() {
+            modeBtn.textContent = body.classList.contains('dark-mode') ? "☀️ 亮色模式" : "🌙 暗黑模式";
         }
 
-        // 切换暗黑模式
+        if (localStorage.getItem(THEME_KEY) === 'dark') {
+            body.classList.add('dark-mode');
+        }
+        syncModeBtnText();
+
         modeBtn.addEventListener('click', () => {
             if (body.classList.contains('dark-mode')) {
                 body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
-                modeBtn.textContent = "🌙 暗黑模式";
+                localStorage.setItem(THEME_KEY, 'light');
             } else {
                 body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'enabled');
-                modeBtn.textContent = "☀️ 亮色模式";
+                localStorage.setItem(THEME_KEY, 'dark');
             }
+            syncModeBtnText();
         });
 
-        // 2. 从URL参数中获取MD文件路径
+        // 2. 从URL参数中获取并校验MD文件路径
+        const ALLOWED_MD_FILES = new Set(['code_gateway.md']);
+
         function getMdFilePath() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('file'); // 获取?file=xxx中的路径
+            const file = (urlParams.get('file') || '').replace(/\\/g, '/');
+            return ALLOWED_MD_FILES.has(file) ? file : null;
         }
 
         // 3. 加载并解析Markdown文件
@@ -242,7 +248,8 @@
 
                 // 解析MD内容为HTML并插入页面
                 const htmlContent = marked.parse(mdContent);
-                mdContainer.innerHTML = htmlContent;
+                const safeHtml = DOMPurify.sanitize(htmlContent);
+                mdContainer.innerHTML = safeHtml;
 
                 // 额外高亮（防止部分代码未被解析）
                 document.querySelectorAll('pre code').forEach((block) => {

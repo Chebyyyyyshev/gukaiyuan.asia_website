@@ -1,127 +1,174 @@
-// 页面所有功能入口 - DOM加载完成后执行
-document.addEventListener('DOMContentLoaded', function() {
-    // ========== 1. 暗黑/亮色模式切换 + 本地记忆 【核心新增】 ==========
-    const modeBtn = document.querySelector('.mode-btn');
+document.addEventListener("DOMContentLoaded", () => {
+    const THEME_KEY = "siteMode";
+    const modeBtn = document.querySelector(".mode-btn");
     const html = document.documentElement;
-    // 读取本地存储的模式
-    const saveMode = localStorage.getItem('siteMode');
-    if (saveMode === 'dark') {
-        html.classList.add('dark');
-        modeBtn.textContent = '☀️ 亮色模式';
+
+    const updateModeLabel = () => {
+        if (!modeBtn) {
+            return;
+        }
+        modeBtn.textContent = html.classList.contains("dark") ? "☀️ 亮色模式" : "🌙 暗黑模式";
+    };
+
+    if (localStorage.getItem(THEME_KEY) === "dark") {
+        html.classList.add("dark");
     }
-    // 切换模式
-    modeBtn.addEventListener('click', () => {
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            modeBtn.textContent = '🌙 暗黑模式';
-            localStorage.setItem('siteMode', 'light');
-        } else {
-            html.classList.add('dark');
-            modeBtn.textContent = '☀️ 亮色模式';
-            localStorage.setItem('siteMode', 'dark');
-        }
-    });
+    updateModeLabel();
 
-    // ========== 2. 回到顶部 + 阅读进度条 【核心新增】 ==========
-    const backTop = document.querySelector('.back-to-top');
-    const progressBar = document.querySelector('.progress-bar');
-    window.addEventListener('scroll', () => {
-        // 回到顶部显隐
-        if (window.scrollY > 300) {
-            backTop.classList.add('show');
-        } else {
-            backTop.classList.remove('show');
-        }
-        // 阅读进度条计算
-        const scrollH = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = (window.scrollY / scrollH) * 100;
-        progressBar.style.width = scrollPercent + '%';
-    });
-    // 点击回到顶部 + 平滑滚动
-    backTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (modeBtn) {
+        modeBtn.addEventListener("click", () => {
+            html.classList.toggle("dark");
+            localStorage.setItem(THEME_KEY, html.classList.contains("dark") ? "dark" : "light");
+            updateModeLabel();
+        });
+    }
 
-    // ========== 3. 全局平滑滚动 【新增】 ==========
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const backTop = document.querySelector(".back-to-top");
+    const progressBar = document.querySelector(".progress-bar");
+    const syncScrollUi = () => {
+        const scrollHeight = Math.max(document.body.scrollHeight - window.innerHeight, 0);
+        const percent = scrollHeight === 0 ? 0 : Math.min((window.scrollY / scrollHeight) * 100, 100);
+
+        if (progressBar) {
+            progressBar.style.width = `${percent}%`;
+        }
+        if (backTop) {
+            backTop.classList.toggle("show", window.scrollY > 320);
+        }
+    };
+
+    window.addEventListener("scroll", syncScrollUi, { passive: true });
+    syncScrollUi();
+
+    if (backTop) {
+        backTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const targetId = link.getAttribute("href");
+            const target = targetId ? document.querySelector(targetId) : null;
+            if (!target) {
+                return;
+            }
+            event.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
     });
 
-    // ========== 4. 博客页核心功能：加载解析MD文章+代码高亮+代码复制 【核心新增】 ==========
-    const readBtns = document.querySelectorAll('.read-btn');
-    const mdContent = document.querySelector('.markdown-content');
-    if (readBtns.length > 0) {
-        readBtns.forEach(btn => {
-            btn.addEventListener('click', async () => {
-                const mdPath = btn.getAttribute('data-md');
+    const mdButtons = Array.from(document.querySelectorAll("button[data-md]"));
+    const mdContent = document.querySelector(".markdown-content");
+    if (mdButtons.length > 0 && mdContent) {
+        const allowedMarkdownFiles = new Set(
+            mdButtons
+                .map((button) => button.getAttribute("data-md"))
+                .filter((path) => typeof path === "string" && path.length > 0),
+        );
+
+        const appendCopyButtons = () => {
+            mdContent.querySelectorAll("pre").forEach((pre) => {
+                if (pre.querySelector(".copy-code")) {
+                    return;
+                }
+                const codeNode = pre.querySelector("code");
+                if (!codeNode) {
+                    return;
+                }
+                const copyBtn = document.createElement("button");
+                copyBtn.type = "button";
+                copyBtn.className = "copy-code";
+                copyBtn.textContent = "复制代码";
+                copyBtn.addEventListener("click", async () => {
+                    try {
+                        await navigator.clipboard.writeText(codeNode.textContent || "");
+                        copyBtn.textContent = "复制成功";
+                        setTimeout(() => {
+                            copyBtn.textContent = "复制代码";
+                        }, 1500);
+                    } catch {
+                        copyBtn.textContent = "复制失败";
+                        setTimeout(() => {
+                            copyBtn.textContent = "复制代码";
+                        }, 1500);
+                    }
+                });
+                pre.appendChild(copyBtn);
+            });
+        };
+
+        mdButtons.forEach((button) => {
+            button.addEventListener("click", async () => {
+                const mdPath = button.getAttribute("data-md");
+                if (!mdPath || !allowedMarkdownFiles.has(mdPath)) {
+                    mdContent.innerHTML = "<h3>加载失败</h3><p>文章路径不在允许列表中。</p>";
+                    mdContent.classList.add("show");
+                    return;
+                }
+
                 try {
-                    const res = await fetch(mdPath);
-                    if (!res.ok) throw new Error('文章加载失败，请检查文件路径');
-                    const mdText = await res.text();
-                    // 解析MD并高亮代码
+                    const response = await fetch(mdPath);
+                    if (!response.ok) {
+                        throw new Error("文章加载失败，请检查文件路径");
+                    }
+                    const mdText = await response.text();
+
                     marked.setOptions({
-                        highlight: (code, lang) => lang ? hljs.highlight(code, { language: lang }).value : hljs.highlightAuto(code).value
+                        gfm: true,
+                        breaks: true,
                     });
-                    const safeHtml = DOMPurify.sanitize(marked.parse(mdText));
+
+                    const rawHtml = marked.parse(mdText);
+                    const safeHtml =
+                        typeof DOMPurify !== "undefined" ? DOMPurify.sanitize(rawHtml) : rawHtml;
                     mdContent.innerHTML = safeHtml;
-                    mdContent.classList.add('show');
-                    // 滚动到文章区域
-                    mdContent.scrollIntoView({ behavior: 'smooth' });
-                    // 给代码块加复制按钮
-                    document.querySelectorAll('pre').forEach(pre => {
-                        const copyBtn = document.createElement('button');
-                        copyBtn.className = 'copy-code';
-                        copyBtn.textContent = '复制代码';
-                        copyBtn.onclick = () => {
-                            const code = pre.querySelector('code').textContent;
-                            navigator.clipboard.writeText(code);
-                            copyBtn.textContent = '复制成功!';
-                            setTimeout(() => copyBtn.textContent = '复制代码', 2000);
-                        };
-                        pre.appendChild(copyBtn);
-                    });
-                } catch (err) {
-                    mdContent.innerHTML = `<h3>加载失败</h3><p>${err.message}</p>`;
-                    mdContent.classList.add('show');
+
+                    if (typeof hljs !== "undefined") {
+                        mdContent.querySelectorAll("pre code").forEach((block) => {
+                            hljs.highlightElement(block);
+                        });
+                    }
+                    appendCopyButtons();
+                    mdContent.classList.add("show");
+                    mdContent.scrollIntoView({ behavior: "smooth", block: "start" });
+                } catch (error) {
+                    const message = error instanceof Error ? error.message : "未知错误";
+                    mdContent.innerHTML = `<h3>加载失败</h3><p>${message}</p>`;
+                    mdContent.classList.add("show");
                 }
             });
         });
     }
 
-    // ========== 5. 博客页：文章关键词搜索功能 【新增】 ==========
-    const searchInput = document.getElementById('article-search');
+    const searchInput = document.getElementById("article-search");
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const keyword = e.target.value.toLowerCase();
-            document.querySelectorAll('.article-card').forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                card.style.display = (title.includes(keyword) || desc.includes(keyword)) ? 'block' : 'none';
+        searchInput.addEventListener("input", (event) => {
+            const keyword = String(event.target.value || "").trim().toLowerCase();
+            document.querySelectorAll(".article-card").forEach((card) => {
+                const title = (card.querySelector("h3")?.textContent || "").toLowerCase();
+                const desc = (card.querySelector("p")?.textContent || "").toLowerCase();
+                card.style.display = title.includes(keyword) || desc.includes(keyword) ? "" : "none";
             });
         });
     }
 
-    // ========== 6. 联系页：留言表单提交提示 【新增】 ==========
-    const msgForm = document.getElementById('msg-form');
+    const msgForm = document.getElementById("msg-form");
+    const formStatus = document.getElementById("form-status");
     if (msgForm) {
-        msgForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('留言发送成功！感谢您的反馈，我会尽快回复您～');
+        msgForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (formStatus) {
+                formStatus.textContent = "留言已收到，感谢你的反馈。";
+            }
             msgForm.reset();
         });
     }
 
-    // ========== 7. 版权年份自动更新 【保留+优化】 ==========
-    const footerText = document.querySelector('footer p');
+    const footerText = document.querySelector("footer p");
     if (footerText) {
         const year = new Date().getFullYear();
         footerText.textContent = `© ${year} gukaiyuan.asia - 所有权利保留`;
     }
-
-    console.log('技术空间 - 所有功能加载完成 ✔️');
 });
 
