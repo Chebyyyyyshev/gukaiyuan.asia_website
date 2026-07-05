@@ -3,6 +3,7 @@ export type NavItem = {
   href: string;
   description: string;
   showInPrimaryNav: boolean;
+  showInFooter: boolean;
 };
 
 export const navigationItems: NavItem[] = [
@@ -11,39 +12,49 @@ export const navigationItems: NavItem[] = [
     href: "/",
     description: "新版首页骨架",
     showInPrimaryNav: true,
+    showInFooter: true,
   },
   {
     title: "Projects",
     href: "/projects",
     description: "项目作品集",
     showInPrimaryNav: true,
+    showInFooter: true,
   },
   {
     title: "Research",
     href: "/research",
     description: "科研档案，等待真实内容补充",
     showInPrimaryNav: false,
+    showInFooter: false,
   },
   {
     title: "Notes",
     href: "/notes",
     description: "技术知识库",
     showInPrimaryNav: true,
+    showInFooter: true,
   },
   {
     title: "Blog",
     href: "/blog",
     description: "叙事型文章与阶段总结，等待内容迁移",
     showInPrimaryNav: false,
+    showInFooter: false,
   },
   {
     title: "About",
     href: "/about",
     description: "个人介绍与公开联系方式",
     showInPrimaryNav: true,
+    showInFooter: true,
   },
 ];
 
 export const primaryNavigationItems = navigationItems.filter(
   (item) => item.showInPrimaryNav,
+);
+
+export const footerNavigationItems = navigationItems.filter(
+  (item) => item.showInFooter,
 );

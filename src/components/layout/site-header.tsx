@@ -14,6 +14,7 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export function SiteHeader() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
+        menuButtonRef.current?.focus();
       }
     };
 
@@ -53,6 +55,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <button
+            ref={menuButtonRef}
             type="button"
             aria-label={isOpen ? "关闭导航菜单" : "打开导航菜单"}
             aria-expanded={isOpen}

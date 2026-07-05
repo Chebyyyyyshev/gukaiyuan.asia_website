@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { navigationItems } from "@/config/navigation";
+import { footerNavigationItems } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 
 export function SiteFooter() {
@@ -12,7 +12,7 @@ export function SiteFooter() {
           research archive, and technical knowledge base.
         </p>
         <nav className="flex flex-wrap gap-x-4 gap-y-2" aria-label="页脚导航">
-          {navigationItems.map((item) => (
+          {footerNavigationItems.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-text-primary">
               {item.title}
             </Link>

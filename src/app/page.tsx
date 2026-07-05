@@ -33,8 +33,11 @@ export default function Home() {
 
       <section className="grid gap-4 md:grid-cols-3" aria-label="新版栏目入口">
         {sections.map((section) => (
-          <Card key={section.href}>
-            <Link href={section.href} className="block">
+          <Card key={section.href} variant="interactive">
+            <Link
+              href={section.href}
+              className="block rounded-[calc(var(--radius-card)-0.25rem)] focus:outline-none"
+            >
               <CardHeader>
                 <CardTitle>{section.title}</CardTitle>
                 <CardDescription>{section.description}</CardDescription>

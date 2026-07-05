@@ -11,6 +11,18 @@
 
 如果继续沿用旧静态站配置，Branch Deploy 可能发布错误目录，访问时会显示 Netlify 平台自己的通用 404，而不是项目中的 Next.js 404 页面。
 
+## 当前 Netlify 配置
+
+当前 Netlify Runtime 已设为 Next.js。
+
+`redesign` Branch Deploy 的实际配置为：
+
+- Build command：`npm run build`
+- Publish directory：`.next`
+- Runtime：Next.js
+
+该配置只作用于 `redesign` 分支当前的 Branch Deploy，不修改 DNS、域名或 `main` 分支旧站部署。
+
 ## 文件化构建配置
 
 仓库根目录使用 `netlify.toml` 明确声明构建命令和发布目录：
@@ -21,7 +33,7 @@
   publish = ".next"
 ```
 
-该文件配置会覆盖 Netlify UI 中旧的构建设置，确保 Netlify 对 `redesign` 分支执行 Next.js 构建，并发布 `.next` 目录。
+该文件配置用于和当前 Netlify Branch Deploy 设置保持一致，确保 Netlify 对 `redesign` 分支执行 Next.js 构建，并发布 `.next` 目录。
 
 ## 当前阶段约束
 
@@ -32,7 +44,6 @@
 - 不创建 Netlify Functions。
 - 不创建 API Route。
 - 不添加不必要的 redirects。
-- 不修改 Netlify 后台设置。
 - 不修改域名或 DNS。
 
 ## 分支影响

@@ -64,8 +64,10 @@ legacy-site/
 
 - `main`：正式网站分支，当前仍是旧版静态站。
 - `redesign`：新版开发分支，对应 Netlify Branch Deploy。
-- 当前 Netlify 项目最初为纯 HTML 静态站创建，旧的 Netlify UI 构建设置不会在架构变为 Next.js 后可靠自动更新。
-- 根目录 `netlify.toml` 明确指定 `npm run build` 和 `.next` 发布目录，用文件配置覆盖 Netlify UI 中可能残留的旧静态站配置。
+- 当前 Netlify 项目最初为纯 HTML 静态站创建，架构变为 Next.js 后需要明确构建配置。
+- 当前 Netlify Runtime 已设为 Next.js。
+- `redesign` Branch Deploy 的构建命令为 `npm run build`，发布目录为 `.next`。
+- 根目录 `netlify.toml` 同步声明 `npm run build` 和 `.next`，确保文件配置与 Netlify 当前 Branch Deploy 设置一致。
 - 该配置当前只存在于 `redesign` 分支，不影响 `main` 的旧站部署。
 - 未来新版合并到 `main` 后，正式 Next.js 站点继续使用同一配置。
 - 不安装 `@netlify/plugin-nextjs`，不配置静态导出，不创建不必要的 Functions 或 redirects。

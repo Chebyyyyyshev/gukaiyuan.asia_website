@@ -5,13 +5,22 @@ import { cn } from "@/lib/cn";
 type CardProps = HTMLAttributes<HTMLElement> & {
   as?: ElementType;
   children: ReactNode;
+  variant?: "default" | "interactive";
 };
 
-export function Card({ as: Comp = "article", className, children, ...props }: CardProps) {
+export function Card({
+  as: Comp = "article",
+  className,
+  children,
+  variant = "default",
+  ...props
+}: CardProps) {
   return (
     <Comp
       className={cn(
-        "rounded-[var(--radius-card)] border border-border bg-surface p-5 shadow-[var(--shadow-soft)] transition-colors hover:border-accent",
+        "rounded-[var(--radius-card)] border border-border bg-surface p-5 shadow-[var(--shadow-soft)]",
+        variant === "interactive" &&
+          "transition-colors hover:border-accent focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/30",
         className,
       )}
       {...props}
