@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>物联网学习记录 | GUKAIYUAN.ASIA</title>
+  <!-- 复用现有样式 -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* 仅在此页面新增的专属样式（不污染全局） */
+    .iot-container {
+      display: flex;
+      min-height: calc(100vh - 80px);
+      /* 减去头部+页脚高度 */
+      margin-top: 60px;
+      /* 头部固定高度 */
+      transition: margin-left 0.3s ease;
+    }
+
+    /* 侧边目录 */
+    .iot-sidebar {
+      width: 280px;
+      background: #f8f9fa;
+      padding: 20px;
+      overflow-y: auto;
+      position: fixed;
+      height: calc(100vh - 60px);
+      transition: all 0.3s ease;
+      z-index: 90;
+      left: 0;
+    }
+
+    /* 侧边栏头部 */
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-header h3 {
+      margin: 0;
+      color: #222;
+    }
+
+    /* 内部折叠按钮 */
+    .sidebar-inner-toggle {
+      padding: 4px 8px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: 0.2s;
+    }
+
+    .sidebar-inner-toggle:hover {
+      background: #0056b3;
+    }
+
+    /* 桌面端迷你展开按钮 */
+    .sidebar-mini-toggle {
+      position: fixed;
+      left: 0;
+      top: 100px;
+      padding: 8px 4px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: 0.3s ease;
+      z-index: 90;
+      display: none;
+    }
+
+    .sidebar-mini-toggle:hover {
+      background: #0056b3;
+    }
+
+    /* 目录样式 */
+    .iot-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .iot-sidebar li {
+      margin: 12px 0;
+      line-height: 1.6;
+    }
+
+    .iot-sidebar a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+
+    .iot-sidebar a:hover,
+    .iot-sidebar a.active {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .iot-sidebar .sub-menu {
+      padding-left: 20px;
+      font-size: 0.9em;
+    }
+
+    /* 主内容区（核心修改：文字居中适配） */
+    .iot-content {
+      flex: 1;
+      padding: 30px 20px;
+      /* 左右内边距适配居中 */
+      margin-left: 280px;
+      /* 初始避开侧边栏 */
+      max-width: 900px;
+      /* 限制最大宽度，提升可读性 */
+      margin-right: auto;
+      /* 右侧自动留白，实现居中 */
+      margin-left: 280px;
+      /* 左侧避开侧边栏 */
+      transition: all 0.3s ease;
+      /* 同步过渡 */
+    }
+
+    /* 文字居中核心：让容器内的文本类元素居中 */
+    .iot-content-inner {
+      text-align: center;
+      /* 文字、段落、列表等水平居中 */
+    }
+
+    /* 标题、段落、列表样式调整（保持居中且美观） */
+    .iot-content-inner h2 {
+      color: #222;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 8px;
+      margin: 40px auto 20px;
+      display: inline-block;
+      /* 标题宽度适应内容，居中更协调 */
+    }
+
+    .iot-content-inner h3 {
+      color: #333;
+      margin: 30px auto 15px;
+      display: inline-block;
+    }
+
+    .iot-content-inner p {
+      line-height: 1.8;
+      color: #555;
+      margin: 15px auto;
+      max-width: 800px;
+      /* 段落最大宽度，避免单行过宽影响阅读 */
+      text-align: left;
+      /* 段落文字左对齐（仅容器居中，文字排版更易读） */
+    }
+
+    /* 列表居中（容器居中，列表项左对齐） */
+    .iot-content-inner ul {
+      max-width: 700px;
+      margin: 15px auto;
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    /* 图片样式（保持居中） */
+    .iot-content-inner img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+      /* 图片块级居中 */
+    }
+
+    /* 移动端适配 */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 20px;
+      padding: 8px 12px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 99;
+    }
+
+    /* 侧边栏回收状态 */
+    .iot-sidebar.collapsed {
+      width: 0;
+      padding: 20px 0;
+      overflow: hidden;
+      left: 0;
+    }
+
+    .iot-sidebar.collapsed+.sidebar-mini-toggle {
+      display: block;
+    }
+
+    /* 目录收起后，内容区全屏居中 */
+    .iot-container.collapsed .iot-content {
+      margin-left: auto;
+      /* 取消左侧偏移 */
+      margin-right: auto;
+      /* 左右自动，实现全屏居中 */
+      max-width: 1000px;
+      /* 收起后仍限制最大宽度，避免超宽 */
+    }
+
+    @media (max-width: 768px) {
+      .iot-sidebar {
+        left: -280px;
+        width: 280px;
+      }
+
+      .iot-sidebar.active {
+        left: 0;
+      }
+
+      .iot-sidebar.active.collapsed {
+        left: 0;
+        width: 280px;
+        padding: 20px;
+      }
+
+      .iot-content {
+        margin-left: 0;
+        padding: 20px 15px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .sidebar-mini-toggle {
+        display: none !important;
+      }
+
+      .iot-container.collapsed .iot-content {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .iot-content-inner p,
+      .iot-content-inner ul {
+        max-width: 100%;
+        /* 移动端取消宽度限制 */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 顶部导航 -->
+  <header
+    style="position: fixed; top: 0; left: 0; width: 100%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 15px 30px; z-index: 100;">
+    <nav>
+      <a href="../../index.html" style="margin-right: 20px; text-decoration: none; color: #333;">首页</a>
+      <a href="../../blogs.html" style="margin-right: 20px; text-decoration: none; color: #333;">博客</a>
+      <a href="index.html"
+        style="margin-right: 20px; text-decoration: none; color: #007bff; font-weight: bold;">物联网学习</a>
+      <a href="../../contact.html" style="text-decoration: none; color: #333;">联系</a>
+    </nav>
+  </header>
+
+  <!-- 移动端菜单按钮 -->
+  <button class="menu-toggle">目录</button>
+
+  <!-- 主体容器 -->
+  <div class="iot-container">
+    <!-- 侧边目录 -->
+    <aside class="iot-sidebar">
+      <div class="sidebar-header">
+        <h3>学习目录</h3>
+        <button class="sidebar-inner-toggle" id="sidebarInnerBtn">收起</button>
+      </div>
+      <ul class="main-menu">
+        <li><a href="#chapter1" class="active">第一章：物联网基础概念</a>
+          <ul class="sub-menu">
+            <li><a href="#chapter1-1">1.1 物联网定义与核心特征</a></li>
+            <li><a href="#chapter1-2">1.2 典型架构（感知层/网络层/应用层）</a></li>
+          </ul>
+        </li>
+        <li><a href="#chapter2">第二章：通信协议与网络</a>
+          <ul class="sub-menu">
+            <li><a href="#chapter2-1">2.1 短距离通信（WiFi/Bluetooth/Zigbee）</a></li>
+            <li><a href="#chapter2-2">2.2 广域网通信（NB-IoT/LoRa/5G）</a></li>
+          </ul>
+        </li>
+        <li><a href="#chapter3">第三章：嵌入式开发与实践</a>
+          <ul class="sub-menu">
+            <li><a href="#chapter3-1">3.1 开发板选型（STM32/ESP32）</a></li>
+            <li><a href="#chapter3-2">3.2 传感器数据采集与上传</a></li>
+          </ul>
+        </li>
+        <li><a href="#chapter4">第四章：智能家居项目实战</a>
+          <ul class="sub-menu">
+            <li><a href="#chapter4-1">4.1 项目概况与目标</a></li>
+            <li><a href="#chapter4-2">4.2 软硬件环境支撑</a></li>
+            <li><a href="#chapter4-3">4.3 系统设计与成果</a></li>
+            <li><a href="#chapter4-4">4.4 总结与未来展望</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- 桌面端迷你展开按钮 -->
+    <button class="sidebar-mini-toggle" id="sidebarMiniBtn">展开</button>
+
+    <!-- 主内容区（新增内层容器实现居中） -->
+    <article class="iot-content">
+      <div class="iot-content-inner">
+        <h1 style="font-size: 2em; color: #222; margin-bottom: 30px; display: inline-block;">物联网学习记录</h1>
+        <p>本系列记录物联网从基础到实践的学习过程，包含概念、协议、开发案例等内容，持续更新~</p>
+
+        <!-- 第一章 -->
+        <section id="chapter1">
+          <h2>第一章：物联网基础概念</h2>
+          <h3 id="chapter1-1">1.1 物联网定义与核心特征</h3>
+          <p>物联网（Internet of Things, IoT）是指通过信息传感设备，将任何物品与互联网相连接，进行信息交换和通信，以实现智能化识别、定位、跟踪、监控和管理的一种网络。</p>
+          <p>核心特征：**万物互联**、**数据驱动**、**智能交互**。</p>
+          <img src="../../pictures/sensors_data.png" loading="lazy" alt="物联网三层架构示意图">
+
+          <h3 id="chapter1-2">1.2 典型架构（感知层/网络层/应用层）</h3>
+          <p>物联网标准架构分为三层：</p>
+          <ul>
+            <li>感知层：负责数据采集（传感器、RFID、二维码等）</li>
+            <li>网络层：负责数据传输（有线/无线通信网络）</li>
+            <li>应用层：负责数据处理与业务呈现（云平台、APP、Web等）</li>
+          </ul>
+        </section>
+
+        <!-- 第二章 -->
+        <section id="chapter2">
+          <h2>第二章：通信协议与网络</h2>
+          <h3 id="chapter2-1">2.1 短距离通信（WiFi/Bluetooth/Zigbee）</h3>
+          <p>短距离通信技术适用于室内/小范围设备互联，不同协议的适用场景不同：</p>
+          <img src="../../pictures/sensors_data.png" loading="lazy" alt="物联网短距离协议对比">
+          <p>WiFi：带宽高、功耗高，适用于家庭智能设备；Bluetooth：低功耗、短距，适用于可穿戴设备；Zigbee：低功耗、自组网，适用于工业传感器网络。</p>
+
+          <h3 id="chapter2-2">2.2 广域网通信（NB-IoT/LoRa/5G）</h3>
+          <p>广域网通信技术解决远距离设备联网问题，是物联网规模化部署的核心：</p>
+          <ul>
+            <li>NB-IoT：运营商网络，低功耗、广覆盖，适用于智能水表/电表</li>
+            <li>LoRa：非授权频段，自组网，适用于偏远地区物联网</li>
+            <li>5G：高速率、低时延，适用于自动驾驶、工业控制等场景</li>
+          </ul>
+        </section>
+
+        <!-- 第三章 -->
+        <section id="chapter3">
+          <h2>第三章：嵌入式开发与实践</h2>
+          <h3 id="chapter3-1">3.1 开发板选型（STM32/ESP32）</h3>
+          <p>嵌入式开发是物联网感知层的核心，主流开发板各有优劣，需根据项目需求选型：</p>
+          <ul>
+            <li>STM32：性能稳定、外设丰富，适用于工业级、高精度需求项目</li>
+            <li>ESP32：内置WiFi/Bluetooth，开发便捷，适用于民用、低成本智能设备</li>
+          </ul>
+          <img src="../../pictures/sensors_data.png" loading="lazy" alt="STM32与ESP32开发板对比">
+
+          <h3 id="chapter3-2">3.2 传感器数据采集与上传</h3>
+          <p>传感器数据采集的核心流程为：传感器感知环境数据 → 开发板读取数据 → 协议封装 → 上传至网关/云端。</p>
+          <p>常用传感器：DHT11（温湿度）、BH1750（光照）、HC-SR04（超声波测距）。</p>
+
+          <!-- 新增：查看代码按钮（核心部分） -->
+          <div style="margin: 30px 0;">
+            <a href="code_gateway.html?file=code_gateway.md" target="_blank" style="
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: 0.2s;
+            cursor: pointer;
+          ">
+              查看完整代码
+            </a>
+          </div>
+        </section>
+
+        <!-- 第四章：智能家居项目实战 -->
+        <section id="chapter4">
+          <h2>第四章：智能家居项目实战</h2>
+          <h3 id="chapter4-1">4.1 项目概况与目标</h3>
+          <p>依托物联网与AI技术发展趋势，聚焦家居环境智能化，旨在通过技术手段提升生活便捷性、舒适性与安全性。</p>
+          <p>核心目标：构建基于ZigBee与TCP/IP协议的智能家居系统，实现温湿度/光照等环境参数实时采集监控、灯光/窗帘等设备远程智能控制，以及数据上云与可视化展示、历史数据查询。</p>
+          <img src="../../pictures/ui-interface.png" loading="lazy" alt="智能家居项目整体概况">
+
+          <h3 id="chapter4-2">4.2 软硬件环境支撑</h3>
+          <p>开发环境与工具链：以Windows 11为宿主系统，通过VMware Workstation Pro 17虚拟化RedHat 5、Ubuntu
+            16/18系统；代码编写用VSCode/Vim，编译用GCC/ARM-Linux-GCC，调试与传输用Putty/SecureCRT、WinSCP。</p>
+          <p>核心硬件：中软物联网实验箱（CC2530传感器节点、ARM/Linux智能网关）。</p>
+          <p>软件平台：新大陆物联网云平台，支持设备全生命周期管理、数据存储与可视化、远程指令下发。</p>
+          <img src="../../pictures/ui-interface.png" loading="lazy" alt="智能家居项目软硬件平台">
+
+          <h3 id="chapter4-3">4.3 系统设计与成果</h3>
+          <p>总体架构采用四层架构：感知层、网络层、平台层、应用层。</p>
+          <p>核心成果：网关程序多线程并发架构稳定运行，PC客户端能实时展示UDP广播数据，云平台成功接收上传数据并生成温湿度变化曲线，支持历史数据查询。</p>
+          <img src="../../pictures/ui-interface.png" loading="lazy" alt="智能家居项目成果展示">
+
+          <h3 id="chapter4-4">4.4 总结与未来展望</h3>
+          <p>项目成功搭建基于中软物联网实验箱与新大陆云平台的智能家居系统，实现全部核心功能，系统运行稳定。技术收获：掌握物联网系统全流程设计与开发、C语言QT编程、UDP/TCP网络编程、嵌入式Linux环境搭建等。</p>
+          <p>未来展望：兼容更多智能设备、开发移动App、引入AI算法实现自动化控制、强化数据安全、增加边缘计算能力。</p>
+        </section>
+      </div>
+    </article>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="center-text" style="padding: 20px; background: #f5f5f5; margin-top: 40px;">
+    <p>&copy; 2024 GUKAIYUAN.ASIA | 物联网学习记录</p>
+  </footer>
+
+  <!-- 交互脚本 -->
+  <script>
+    const sidebar = document.querySelector('.iot-sidebar');
+    const iotContainer = document.querySelector('.iot-container');
+    const sidebarInnerBtn = document.getElementById('sidebarInnerBtn');
+    const sidebarMiniBtn = document.getElementById('sidebarMiniBtn');
+    const menuToggle = document.querySelector('.menu-toggle');
+
+    // 通用切换函数
+    function toggleSidebarCollapse() {
+      sidebar.classList.toggle('collapsed');
+      iotContainer.classList.toggle('collapsed');
+      const isCollapsed = sidebar.classList.contains('collapsed');
+      sidebarInnerBtn.textContent = isCollapsed ? '展开' : '收起';
+      sidebarMiniBtn.textContent = isCollapsed ? '展开' : '收起';
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('active');
+      }
+    }
+
+    // 目录跳转
+    document.querySelectorAll('.iot-sidebar a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (window.innerWidth <= 768) {
+            sidebar.classList.remove('active');
+          }
+        }
+      });
+    });
+
+    // 滚动高亮
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.iot-content section[id]');
+      let currentSectionId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80;
+        if (window.scrollY >= sectionTop) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+      document.querySelectorAll('.iot-sidebar a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSectionId}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // 移动端目录切换
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      if (sidebar.classList.contains('active')) {
+        sidebar.classList.remove('collapsed');
+        iotContainer.classList.remove('collapsed');
+        sidebarInnerBtn.textContent = '收起';
+      }
+    });
+
+    // 内部按钮与迷你按钮绑定
+    sidebarInnerBtn.addEventListener('click', toggleSidebarCollapse);
+    sidebarMiniBtn.addEventListener('click', toggleSidebarCollapse);
+
+    // 窗口 resize 适配
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('active');
+      } else {
+        if (!sidebar.classList.contains('active')) {
+          sidebar.classList.add('collapsed');
+          iotContainer.classList.add('collapsed');
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
+

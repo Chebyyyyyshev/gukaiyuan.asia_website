@@ -1,31 +1,71 @@
-﻿# gukaiyuan.asia_website
+# gukaiyuan.asia website
 
-个人技术网站（静态站点），用于展示技术文章、专题笔记和联系方式。
+个人网站新版重构工程，目标是建设“个人主页 + 项目作品集 + 科研档案 + 技术知识库”。
 
-## 当前技术栈
-- HTML5
-- CSS3
-- JavaScript（原生）
-- Markdown 渲染：marked + DOMPurify + highlight.js
+## 当前状态
+
+当前分支为 `redesign`，用于新版 Next.js 重构和 Netlify Branch Deploy。`main` 分支对应正式网站。
+
+本阶段已建立工程基础、项目规则、规划文档、全局布局、主题切换、导航结构和页面骨架。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
+
+## 技术栈
+
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- React Server Components 优先
+- next-themes
+- lucide-react
+- npm
+
+## 本地运行
+
+```bash
+npm install
+npm run dev
+```
+
+默认开发地址为 `http://localhost:3000`。如端口被占用，Next.js 会提示使用其他端口。
+
+## npm 命令
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+npm run typecheck
+npm run check
+```
+
+`npm run check` 会依次执行 lint、typecheck 和 build。
 
 ## 目录结构
-- `index.html`：主页（简介）
-- `blogs.html`：博客列表与 Markdown 阅读
-- `contact.html`：联系方式与留言表单（前端演示）
-- `css/style.css`：全站公共样式
-- `js/app.js`：全站公共交互逻辑
-- `md/`：博客 Markdown 内容
-- `notes/iot/`：物联网专题页面与代码文档页
 
-## 已完成优化（2026-05-16）
-- 修复博客 Markdown 死链，补齐 `md/article1~3.md`
-- 修复 `notes/iot` 子页资源 404
-- 增强 Markdown 渲染安全（DOMPurify + 白名单文件校验）
-- 统一暗黑模式存储键，跨页面状态一致
-- 优化主页面脚本加载，移除无用依赖
-- 增强可访问性（skip link、语义化按钮、表单 label）
+```text
+src/
+  app/
+  components/
+    common/
+    layout/
+    ui/
+  config/
+  lib/
+  types/
+docs/
+legacy-site/
+```
 
-## 后续可选增强
-- 增加 sitemap.xml 与 robots.txt
-- 将留言表单接入后端接口（当前为前端演示）
-- 增加自动化测试（链接检查、HTML 校验）
+## legacy-site
+
+`legacy-site/` 保存旧版 HTML/CSS/JavaScript/Markdown/图片内容。它是后续迁移与核对的只读来源，不应在新版开发中直接改写旧站正文。
+
+## 部署关系
+
+- `main`：正式网站分支。
+- `redesign`：新版开发分支，对应 Netlify Branch Deploy。
+- 当前阶段依赖 Netlify 对现代 Next.js 的自动识别，不创建 `netlify.toml`，不安装 Netlify 插件，不配置 API Route 或 Functions。
+
+## 规则文档
+
+项目规则见 `AGENTS.md`。详细规划与迁移依据见 `docs/`。
