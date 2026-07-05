@@ -1,35 +1,50 @@
-import { PageHeader } from "@/components/common/page-header";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import type { ContentSummary } from "@/types/content";
+import type { Metadata } from "next";
 
-const plannedProjects: ContentSummary[] = [
-  {
-    title: "智能家居 IoT 项目",
-    description:
-      "来自旧站物联网专题的已确认项目案例。后续阶段将迁移系统设计、项目截图、网关代码、成果与复盘。",
-    source: "legacy-site/notes/iot/index.html",
-    status: "ready-for-migration",
+import { PageHeader } from "@/components/common/page-header";
+import { ProjectCard } from "@/components/projects/project-card";
+import { getAllProjects } from "@/lib/content/projects";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "项目与实践 | 顾开元",
   },
-];
+  description:
+    "顾开元的项目与工程实践，记录物联网、嵌入式系统、数据采集与通信网关相关实现。",
+  openGraph: {
+    title: "项目与实践 | 顾开元",
+    description:
+      "顾开元的项目与工程实践，记录物联网、嵌入式系统、数据采集与通信网关相关实现。",
+    type: "website",
+  },
+};
 
 export default function ProjectsPage() {
+  const projects = getAllProjects();
+
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="Projects"
-        title="项目作品集骨架"
-        description="项目页将统一承载已确认项目、未来在线工具、交互演示与可视化功能。本阶段只建立结构，不补写未核实的项目经历。"
+        eyebrow="PROJECTS"
+        title="项目与实践"
+        description="记录从问题分析、系统设计到实现验证的技术项目与工程实践。"
       />
-      <section className="grid gap-4 md:grid-cols-2" aria-label="待迁移项目">
-        {plannedProjects.map((project) => (
-          <Card key={project.title}>
-            <CardHeader>
-              <CardTitle>{project.title}</CardTitle>
-              <CardDescription>{project.description}</CardDescription>
-              <p className="text-sm text-text-secondary">迁移源：{project.source}</p>
-            </CardHeader>
-          </Card>
+
+      <section className="grid gap-5" aria-label="项目列表">
+        {projects.map((project) => (
+          <ProjectCard key={project.metadata.slug} project={project} />
         ))}
+      </section>
+
+      <section
+        className="max-w-3xl border-l-2 border-accent pl-4 text-[15px] leading-7 text-text-secondary"
+        aria-labelledby="projects-notes-boundary-title"
+      >
+        <h2 id="projects-notes-boundary-title" className="sr-only">
+          Projects 与 Notes 的边界
+        </h2>
+        <p>
+          Projects 记录已经有真实实现痕迹的项目案例；更细的通信、嵌入式与代码说明由 Notes 承接，避免把知识库内容重复包装成项目成果。
+        </p>
       </section>
     </div>
   );

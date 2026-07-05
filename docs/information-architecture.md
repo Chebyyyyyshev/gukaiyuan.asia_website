@@ -20,6 +20,11 @@
 - `/notes/embedded/development-boards`
 - `/notes/iot/data-acquisition-and-gateway`
 
+## 已实现 Projects 路由
+
+- `/projects`
+- `/projects/smart-home-iot`
+
 ## 主导航
 
 当前主导航只展示：
@@ -41,6 +46,8 @@ Research 和 Blog 路由已建立，但在没有真实内容前不显示在主�
 - 网关代码。
 - 项目成果与复盘。
 - 未来在线工具和交互演示。
+
+Projects 已通过本地 MDX、TypeScript registry 和静态详情路由实现。当前只有一个真实项目，不创建占位项目或虚构第二项目。
 
 ### Notes
 
@@ -99,4 +106,4 @@ Notes 已通过本地 MDX、TypeScript registry 和静态详情路由实现。�
 - `/notes/iot/index.html` -> `/notes/iot/fundamentals`
 - `/notes/iot/code_gateway.html` -> `/notes/iot/data-acquisition-and-gateway`
 
-智能家居项目详情页和 Projects 内容系统尚未实现，旧站物联网专题中的项目章节暂不迁移到 Notes。
+智能家居项目详情页和 Projects 内容系统已在第四阶段实现，旧站物联网专题中的项目章节迁移到 `/projects/smart-home-iot`，不迁入 Notes 正文。

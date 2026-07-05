@@ -1,23 +1,49 @@
 # Content Model
 
-本文档记录新版内容模型。第三阶段已实现 Notes 的本地 MDX 内容系统；Projects、Blog、Research 仍只保留模型规划，不迁移正文。
+本文档记录新版内容模型。第三阶段已实现 Notes 的本地 MDX 内容系统；第四阶段已实现 Projects 的本地 MDX 内容系统。Blog、Research 仍只保留模型规划，不迁移正文。
 
 ## Project
 
 - title
 - slug
+- englishTitle
 - summary
 - status
-- date
+- statusLabel
 - tags
-- cover
-- links
-- techStack
-- sections
+- order
+- featured
+- coverImage
+- coverAlt
+- sourcePaths
+- relatedNoteSlugs
 
-已确认项目源：
+已实现位置：
 
-- 智能家居 IoT 项目，来源：`legacy-site/notes/iot/index.html` 和 `legacy-site/notes/iot/code_gateway.md`。
+- 正文：`src/content/projects/smart-home-iot.mdx`
+- registry：`src/lib/content/projects.ts`
+- 类型：`src/types/project.ts`
+- 详情路由：`src/app/projects/[slug]/page.tsx`
+
+当前 Project 不使用虚构日期、完成百分比、访问量、仓库链接、在线 Demo、团队信息或角色信息。`sourcePaths` 只用于开发溯源，不在公开页面展示完整本地路径。
+
+已迁移项目源：
+
+- `legacy-site/notes/iot/index.html#chapter4-1` -> `/projects/smart-home-iot`
+- `legacy-site/notes/iot/index.html#chapter4-2` -> `/projects/smart-home-iot`
+- `legacy-site/notes/iot/index.html#chapter4-3` -> `/projects/smart-home-iot`
+- `legacy-site/notes/iot/index.html#chapter4-4` -> `/projects/smart-home-iot`
+- `legacy-site/notes/iot/code_gateway.md` -> 项目实现概述与 Notes 交叉链接
+- `legacy-site/pictures/ui-interface.png` -> `public/images/projects/smart-home-interface.png`
+
+Projects MDX 支持：
+
+- 统一正文排版。
+- 项目截图组件。
+- 系统组成事实卡片。
+- 系统流程图。
+- 相关 Notes 卡片。
+- 自动标题 slug、标题锚点和文章目录。
 
 ## Note
 

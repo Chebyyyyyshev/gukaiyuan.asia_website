@@ -25,17 +25,11 @@ export type FocusItem = {
 
 export type FeaturedProject = {
   eyebrow: string;
-  title: string;
+  projectSlug: string;
   description: string;
   systemLine: string;
-  tags: string[];
-  href: string;
   actionLabel: string;
-  image: {
-    src: string;
-    alt: string;
-    caption: string;
-  };
+  imageCaption: string;
 };
 
 export type KnowledgeCategory = {

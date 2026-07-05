@@ -1,6 +1,6 @@
 # Content Migration Status
 
-本文档记录第三阶段 Notes 内容迁移状态。当前只迁移已确认的学习笔记内容，不迁移智能家居项目章节，不迁移 Blog、Research 或项目详情正文。
+本文档记录 Notes 内容迁移状态。第三阶段只迁移已确认的学习笔记内容；第四阶段已将智能家居项目章节迁移到 Projects，不迁入 Notes 正文。
 
 ## 已迁移 Notes
 
@@ -22,8 +22,8 @@
 
 未迁入 Notes 的旧图：
 
-- `legacy-site/pictures/ui-interface.png`：已在第二阶段复制为项目截图，归属 Projects。
-- `legacy-site/pictures/ui界面.png`：与项目截图重复，当前阶段不处理。
+- `legacy-site/pictures/ui-interface.png`：已在第二阶段复制为项目截图，并在第四阶段用于 `/projects/smart-home-iot`。
+- `legacy-site/pictures/ui界面.png`：与项目截图重复，第四阶段未重复公开。
 
 ## 迁移处理原则
 
@@ -34,19 +34,19 @@
 - 不展示虚构日期、阅读量、阅读时长或作者信息。
 - 网关代码标注为旧站保留的实现片段，不声明已在当前环境编译或可直接部署。
 
-## 尚未迁移内容
+## 未迁入 Notes 的内容
 
-以下旧站内容属于 Projects 阶段，本阶段未迁移到 Notes：
+以下旧站内容属于 Projects，已在第四阶段迁移到 `/projects/smart-home-iot`，不迁入 Notes：
 
 - `legacy-site/notes/iot/index.html` 的智能家居项目章节。
 - 智能家居系统目标、环境、功能、截图和项目复盘内容。
-- 项目详情页和项目代码文档页。
+
+项目代码长片段仍由 `/notes/iot/data-acquisition-and-gateway` 承接，项目页只做概述和交叉链接。
 
 以下新版栏目仍未实现正文：
 
 - Blog 正文。
 - Research 正文。
-- Projects 详情页。
 - 站内搜索。
 - 后端、数据库、评论、收藏、阅读量、用户系统。
 
@@ -54,6 +54,6 @@
 
 - 旧站三篇前端内容是否长期保留在 Notes，或未来改写为 Blog。
 - `legacy-site/notes/iot/code_gateway.md` 是否为完整代码，是否有许可或来源约束。
-- 物联网专题中的智能家居项目章节哪些细节适合公开到 Projects。
+- 物联网专题中的实验箱、平台、云服务、IP/端口字段等细节是否适合长期公开。
 - 是否需要为旧图片路径提供兼容访问。
 - `/contact.html` 到 `/about#contact` 的 hash 重定向在生产环境中的最终表现。

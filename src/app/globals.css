@@ -16,6 +16,7 @@
   --radius-control: 0.5rem;
   --content-width: 1220px;
   --article-width: 760px;
+  --project-article-width: 820px;
   --section-spacing: 4.5rem;
 }
 
@@ -348,6 +349,203 @@ button {
   font-weight: 650;
 }
 
+.project-content {
+  max-width: var(--project-article-width);
+}
+
+.project-fact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.9rem;
+}
+
+.project-fact-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.project-fact-title {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.project-fact-card p:not(.project-fact-title) {
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.project-flow {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.project-flow figcaption {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-flow-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.project-flow-item {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.project-flow-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-card) - 0.25rem);
+  background: var(--elevated);
+  padding: 0.9rem;
+}
+
+.project-flow-card svg {
+  color: var(--accent);
+}
+
+.project-flow-title {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  font-weight: 650;
+}
+
+.project-flow-card p:not(.project-flow-title) {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.project-flow-arrow {
+  justify-self: center;
+  color: var(--text-secondary);
+}
+
+.project-flow-arrow-horizontal {
+  display: none;
+}
+
+.project-figure {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  padding: 0.75rem;
+}
+
+.project-figure-frame {
+  position: relative;
+  aspect-ratio: 823 / 526;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius-card) - 0.25rem);
+  background: color-mix(in srgb, var(--background) 82%, white 18%);
+}
+
+.dark .project-figure-frame {
+  background: color-mix(in srgb, var(--elevated) 88%, white 12%);
+}
+
+.project-figure figcaption {
+  margin-top: 0.65rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-related-notes {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.project-related-notes-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.project-related-note-card {
+  display: grid;
+  gap: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  padding: 1rem;
+  transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+}
+
+.project-related-note-card:hover {
+  border-color: var(--accent);
+  background: var(--elevated);
+  transform: translateY(-2px);
+}
+
+.project-related-note-card span {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.project-related-note-title {
+  margin-top: 0;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.project-related-note-card p:not(.project-related-note-title) {
+  margin-top: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.project-related-note-card strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .project-flow-list {
+    grid-template-columns: repeat(9, minmax(0, auto));
+    align-items: stretch;
+  }
+
+  .project-flow-item {
+    display: contents;
+  }
+
+  .project-flow-arrow-horizontal {
+    display: block;
+    align-self: center;
+  }
+
+  .project-flow-arrow-vertical {
+    display: none;
+  }
+
+  .project-related-notes-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .signal-visual-pulse {
   stroke: color-mix(in srgb, var(--accent) 58%, transparent);
   stroke-dasharray: 18 180;
@@ -429,6 +627,7 @@ samp {
   }
 
   .hover\:-translate-y-0\.5:hover,
+  .project-related-note-card:hover,
   .group:hover .group-hover\:translate-x-1,
   .group:hover .group-hover\:translate-x-0\.5 {
     transform: none !important;

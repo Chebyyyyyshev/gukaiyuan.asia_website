@@ -4,6 +4,9 @@ import { CodeBlock } from "@/components/mdx/code-block";
 import { Callout } from "@/components/mdx/callout";
 import { Figure } from "@/components/mdx/figure";
 import { MdxLink } from "@/components/mdx/mdx-link";
+import { ProjectFactList } from "@/components/projects/project-fact-list";
+import { ProjectFigure } from "@/components/projects/project-figure";
+import { SystemFlow } from "@/components/projects/system-flow";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -35,6 +38,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     strong: ({ children }) => <strong>{children}</strong>,
     Figure,
     Callout,
+    ProjectFactList,
+    ProjectFigure,
+    SystemFlow,
     ...components,
   };
 }

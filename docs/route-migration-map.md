@@ -17,6 +17,15 @@
 | `/notes/embedded/development-boards` | 嵌入式开发板 | `legacy-site/notes/iot/index.html` 的 `chapter3-1` |
 | `/notes/iot/data-acquisition-and-gateway` | 数据采集与网关 | `legacy-site/notes/iot/index.html` 的 `chapter3-2` 和 `legacy-site/notes/iot/code_gateway.md` |
 
+## 0.1 第四阶段已落地 Projects 路由
+
+当前 `redesign` 分支已实现 Projects 内容系统，以下路由已经由 Next.js App Router 静态生成：
+
+| 新路由 | 内容 | 来源 |
+| --- | --- | --- |
+| `/projects` | 项目与实践索引 | Projects registry |
+| `/projects/smart-home-iot` | 智能家居 IoT 系统 | `legacy-site/notes/iot/index.html#chapter4-1` 到 `#chapter4-4`；`legacy-site/notes/iot/code_gateway.md`；`legacy-site/pictures/ui-interface.png` |
+
 第三阶段已在 `next.config.ts` 中实现永久重定向：
 
 | 旧路径 | 新路径 |
@@ -32,10 +41,9 @@
 | `/index.html` | `/` |
 | `/contact.html` | `/about#contact` |
 
-未迁移内容：
+仍未迁移内容：
 
-- 物联网专题中的智能家居项目章节仍归属 Projects 阶段。
-- Blog 正文、Research 正文、Projects 详情页、搜索和后端功能仍未实现。
+- Blog 正文、Research 正文、搜索和后端功能仍未实现。
 
 ## 1. 页面与路由盘点
 
@@ -44,8 +52,8 @@
 | `index.html` | `/`、`/index.html` | 关于 - 技术空间 | 当前首页/关于页 | 主导航“关于”；其他主站页面和物联网页返回首页 | 无 | `/` 作为 Home；详细个人介绍迁入 `/about` |
 | `blogs.html` | `/blogs.html` | 博客 - 技术空间 | 博客列表和 Markdown 文章阅读容器 | 主导航“博客”；物联网子页返回博客 | 点击按钮加载 `md/article1.md`、`md/article2.md`、`md/article3.md` | 第三阶段已将旧 `/blogs.html` 重定向到 `/notes`；旧站三篇前端文章已作为 Notes 迁移 |
 | `contact.html` | `/contact.html` | 联系 - 技术空间 | 联系方式与留言表单演示 | 主导航“联系”；物联网专题页顶部导航 | 表单提交由 `js/app.js` 前端拦截，仅显示提示 | 不建议保留独立 Contact；迁到 `/about#contact`，旧路径重定向 |
-| `notes/iot/index.html` | `/notes/iot/`、`/notes/iot/index.html` | 物联网学习记录 \| GUKAIYUAN.ASIA | 物联网专题、学习笔记和智能家居项目内容 | `blogs.html` 的“进入专题”；自身顶部导航 | 内联 JS 控制侧边目录、锚点滚动、高亮和移动端目录 | 第三阶段已拆分学习笔记到 Notes 详情路由；智能家居项目仍留给 Projects 阶段 |
-| `notes/iot/code_gateway.html` | `/notes/iot/code_gateway.html?file=code_gateway.md` | 代码文档 - 物联网学习 | 通过 URL 参数渲染代码 Markdown | `notes/iot/index.html` 中“查看完整代码” | 读取 `file` 参数，只允许加载 `code_gateway.md` | 第三阶段已重定向到 `/notes/iot/data-acquisition-and-gateway`，作为旧站保留的实现片段展示；项目页交叉链接留给 Projects 阶段 |
+| `notes/iot/index.html` | `/notes/iot/`、`/notes/iot/index.html` | 物联网学习记录 \| GUKAIYUAN.ASIA | 物联网专题、学习笔记和智能家居项目内容 | `blogs.html` 的“进入专题”；自身顶部导航 | 内联 JS 控制侧边目录、锚点滚动、高亮和移动端目录 | 第三阶段已拆分学习笔记到 Notes 详情路由；第四阶段已将智能家居项目迁入 `/projects/smart-home-iot` |
+| `notes/iot/code_gateway.html` | `/notes/iot/code_gateway.html?file=code_gateway.md` | 代码文档 - 物联网学习 | 通过 URL 参数渲染代码 Markdown | `notes/iot/index.html` 中“查看完整代码” | 读取 `file` 参数，只允许加载 `code_gateway.md` | 第三阶段已重定向到 `/notes/iot/data-acquisition-and-gateway`，作为旧站保留的实现片段展示；第四阶段已从项目页交叉链接 |
 
 ## 2. 非 HTML 内容路径
 
@@ -128,7 +136,7 @@
 | 新版栏目 | 迁入内容 |
 | --- | --- |
 | Home | 简短个人定位、最新项目/文章入口、Projects/Research/Notes/Blog/About 导航 |
-| Projects | 智能家居/IoT 项目、项目目标、环境、系统设计、成果截图、网关代码文档入口 |
+| Projects | 智能家居/IoT 项目、项目目标、环境、系统设计、成果截图、网关代码文档入口；当前已实现 `/projects/smart-home-iot` |
 | Research | 当前仓库没有明确科研论文、课题、发表物或实验记录；需人工补充 |
 | Notes | 物联网基础、通信协议、嵌入式开发、JavaScript/CSS/HTML/SEO 知识条目 |
 | Blog | 项目复盘、阶段总结、普通技术文章；当前 3 篇前端文章更偏 Notes，但也可改写为 Blog |

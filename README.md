@@ -6,7 +6,7 @@
 
 当前分支为 `redesign`，用于新版 Next.js 重构和 Netlify Branch Deploy。`main` 分支对应正式网站，当前仍保留旧版静态网站。
 
-当前 `redesign` 分支已完成工程基础、项目规则、全局布局、主题切换、导航结构、页面骨架、第二阶段首页正式视觉设计，以及第三阶段 Notes 内容系统。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
+当前 `redesign` 分支已完成工程基础、项目规则、全局布局、主题切换、导航结构、页面骨架、第二阶段首页正式视觉设计、第三阶段 Notes 内容系统，以及第四阶段 Projects 内容系统。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
 
 首页已使用已确认的真实内容：
 
@@ -16,7 +16,7 @@
 - 真实项目：智能家居 IoT 系统。
 - 项目截图：从 `legacy-site/pictures/ui-interface.png` 复制到 `public/images/projects/smart-home-interface.png`。
 
-当前已迁移 7 篇确认的 Notes 正文，并建立本地 MDX 管线、Notes registry、索引页、详情页、代码高亮、代码复制、目录、上一篇/下一篇、相关文章和旧路径重定向。Blog 正文、Research 详情、项目详情页、搜索、评论、联系表单后端、数据库或管理后台仍未实现。
+当前已迁移 7 篇确认的 Notes 正文，并建立本地 MDX 管线、Notes registry、索引页、详情页、代码高亮、代码复制、目录、上一篇/下一篇、相关文章和旧路径重定向。Projects 已建立 registry、索引页和智能家居 IoT 系统详情页。Blog 正文、Research 详情、搜索、评论、联系表单后端、数据库或管理后台仍未实现。
 
 ## 技术栈
 
@@ -27,6 +27,7 @@
 - 本地 MDX：`@next/mdx`
 - 构建期代码高亮：`rehype-pretty-code` + `shiki`
 - TypeScript Notes registry
+- TypeScript Projects registry
 - next-themes
 - lucide-react
 - npm
@@ -64,6 +65,7 @@ src/
     layout/
     mdx/
     notes/
+    projects/
     ui/
   config/
   content/
@@ -88,6 +90,15 @@ Notes 正文位于 `src/content/notes/`，内容索引位于 `src/lib/content/no
 - `/notes/iot/data-acquisition-and-gateway`
 
 旧站 `blogs.html`、三篇 `md/article*.md`、物联网专题和网关代码文档的相关路径已在 `next.config.ts` 中配置永久重定向。当前阶段未迁移智能家居项目章节到 Notes，相关内容保留给 Projects 阶段。
+
+## Projects 内容系统
+
+Projects 正文位于 `src/content/projects/`，内容索引位于 `src/lib/content/projects.ts`，类型定义位于 `src/types/project.ts`。当前只有一个真实项目：
+
+- `/projects`
+- `/projects/smart-home-iot`
+
+智能家居 IoT 系统项目来自旧站物联网专题第四章和网关代码文档。项目页只整理可核查的系统关系、项目截图、实现概述、局限和后续整理方向；不声明当前在线运行，不创建虚构项目，不重复大段 Notes 内容。
 
 ## legacy-site
 

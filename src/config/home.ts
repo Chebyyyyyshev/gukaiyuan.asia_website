@@ -49,18 +49,12 @@ export const homeContent = {
   ],
   featuredProject: {
     eyebrow: "Featured Project",
-    title: "智能家居 IoT 系统",
+    projectSlug: "smart-home-iot",
     description:
       "围绕传感器数据采集、串口通信、网关传输与客户端展示构建的物联网系统实践。",
     systemLine: "传感器采集 · 串口通信 · 网关传输 · 客户端展示",
-    tags: ["IoT", "Embedded", "Data Acquisition", "Gateway"],
-    href: "/projects",
     actionLabel: "查看项目",
-    image: {
-      src: "/images/projects/smart-home-interface.png",
-      alt: "智能家居客户端界面截图",
-      caption: "智能家居客户端原型界面",
-    },
+    imageCaption: "智能家居客户端原型界面",
   },
   knowledge: {
     title: "知识库",

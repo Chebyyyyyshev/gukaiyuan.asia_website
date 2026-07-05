@@ -36,6 +36,25 @@
 - [ ] 不存在路径显示 404 页面。
 - [ ] Research 和 Blog 在无真实内容前不显示在主导航和 Footer。
 
+## 第四阶段 Projects
+
+- [ ] Projects registry 位于 `src/lib/content/projects.ts`。
+- [ ] Projects 类型位于 `src/types/project.ts`。
+- [ ] 智能家居项目正文位于 `src/content/projects/smart-home-iot.mdx`。
+- [ ] `/projects` 索引页只展示一个真实项目。
+- [ ] `/projects/smart-home-iot` 可直接访问和刷新。
+- [ ] 未知项目 slug 显示自定义 404。
+- [ ] 项目页不展示虚构日期、完成进度、团队、角色、访问量、仓库链接或在线 Demo。
+- [ ] 项目图片使用 `public/images/projects/smart-home-interface.png`。
+- [ ] `legacy-site/pictures/ui-interface.png`、`legacy-site/pictures/ui界面.png` 和公开项目图哈希一致。
+- [ ] 未重复公开 `ui界面.png`。
+- [ ] 系统流程图只表达模块关系，不显示虚假实时数据或指标。
+- [ ] 相关 Notes 来自 Notes registry。
+- [ ] 首页 Featured Project 链接到 `/projects/smart-home-iot`。
+- [ ] 三篇相关 Notes 链接回 `/projects/smart-home-iot`。
+- [ ] 未创建第二个虚构项目或占位项目。
+- [ ] 未创建后端、搜索、评论、用户系统、数据库或实时 IoT 接入。
+
 ## 第三阶段 Notes
 
 - [ ] 已安装且仅安装允许的 MDX 相关依赖。

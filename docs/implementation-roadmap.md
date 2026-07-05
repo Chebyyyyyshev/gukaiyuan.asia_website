@@ -36,7 +36,16 @@
 
 ## Phase 4: 页面深化
 
-- 完成 Projects 列表和智能家居 IoT 项目详情页。
+- 建立 Projects 类型定义：`src/types/project.ts`。
+- 建立 TypeScript Projects registry：`src/lib/content/projects.ts`。
+- 完成 Projects 索引页。
+- 完成 `/projects/smart-home-iot` 静态详情页。
+- 迁移旧站物联网专题第四章中的智能家居项目内容。
+- 使用既有项目截图 `public/images/projects/smart-home-interface.png`，并记录 `ui-interface.png` 与 `ui界面.png` 重复关系。
+- 建立项目截图、系统流程图、系统组成事实卡片和相关 Notes 组件。
+- 更新首页 Featured Project 链接到项目详情页。
+- 在三篇相关 Notes 中加入项目交叉链接。
+- 记录项目迁移状态与人工核查项。
 - 完成 About 页面。
 - 视真实内容准备情况完善 Blog 正文。
 - 视真实研究资料准备情况完善 Research 正文。
