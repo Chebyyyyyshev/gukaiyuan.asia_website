@@ -23,9 +23,10 @@ export function FocusSection() {
           const Icon = focusIcons[item.icon];
 
           return (
-            <Card key={item.title} className="h-full">
-              <CardHeader>
-                <div className="mb-2 flex size-11 items-center justify-center rounded-[var(--radius-control)] border border-border bg-elevated text-accent">
+            <Card key={item.title} className="h-full overflow-hidden p-0">
+              <div className="h-px bg-accent/70" aria-hidden="true" />
+              <CardHeader className="p-5">
+                <div className="mb-2 flex size-12 items-center justify-center rounded-[var(--radius-control)] border border-accent/20 bg-accent/10 text-accent">
                   <Icon aria-hidden="true" size={21} strokeWidth={1.8} />
                 </div>
                 <p className="text-sm font-medium text-accent">{item.label}</p>

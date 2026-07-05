@@ -57,10 +57,8 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider
-          attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
         >
           <a className="skip-link" href="#main-content">
             跳转到正文

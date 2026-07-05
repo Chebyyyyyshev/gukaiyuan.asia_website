@@ -7,8 +7,8 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-background">
-      <div className="mx-auto grid w-full max-w-[var(--content-width)] gap-5 px-4 py-9 text-sm text-text-secondary md:grid-cols-[1fr_auto] md:px-6">
+    <footer className="border-t border-border bg-background text-[14px] text-text-secondary">
+      <div className="mx-auto grid w-full max-w-[var(--content-width)] gap-5 px-4 py-9 md:grid-cols-[1fr_auto] md:px-6">
         <div className="grid gap-2">
           <p className="font-medium text-text-primary">{siteConfig.name}</p>
           <p className="max-w-2xl leading-6">

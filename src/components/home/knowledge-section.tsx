@@ -18,7 +18,12 @@ export function KnowledgeSection() {
       />
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         {knowledge.categories.map((category) => (
-          <Card key={category.title} as="div" variant="interactive" className="p-0">
+          <Card
+            key={category.title}
+            as="div"
+            variant="interactive"
+            className="p-0"
+          >
             <Link
               href={category.href}
               className="group grid h-full gap-6 rounded-[var(--radius-card)] p-5 focus:outline-none"
@@ -34,7 +39,7 @@ export function KnowledgeSection() {
                   aria-hidden="true"
                   size={17}
                   strokeWidth={1.8}
-                  className="transition-transform duration-200 group-hover:translate-x-0.5"
+                  className="transition-transform duration-200 group-hover:translate-x-1"
                 />
               </span>
             </Link>

@@ -6,17 +6,17 @@
   --surface: #ffffff;
   --elevated: #f8fafc;
   --text-primary: #111827;
-  --text-secondary: #5b6472;
-  --border: rgba(15, 23, 42, 0.12);
+  --text-secondary: #4b5563;
+  --border: rgba(15, 23, 42, 0.14);
   --accent: #4f8cff;
   --accent-strong: #2563eb;
   --accent-muted: color-mix(in srgb, var(--accent) 12%, transparent);
   --shadow-soft: 0 18px 48px rgba(15, 23, 42, 0.08);
   --radius-card: 0.75rem;
   --radius-control: 0.5rem;
-  --content-width: 1200px;
+  --content-width: 1220px;
   --article-width: 760px;
-  --section-spacing: 4rem;
+  --section-spacing: 4.5rem;
 }
 
 .dark {
@@ -25,8 +25,8 @@
   --surface: #11141a;
   --elevated: #151922;
   --text-primary: #f4f6f8;
-  --text-secondary: #9ca3af;
-  --border: rgba(255, 255, 255, 0.08);
+  --text-secondary: #b3bac6;
+  --border: rgba(255, 255, 255, 0.11);
   --accent: #4f8cff;
   --accent-strong: #7aa7ff;
   --accent-muted: color-mix(in srgb, var(--accent) 16%, transparent);
@@ -106,7 +106,7 @@ button {
   width: min(100%, var(--content-width));
   flex: 1;
   margin: 0 auto;
-  padding: 3rem 1rem 4rem;
+  padding: 3rem 1rem 4.5rem;
 }
 
 .page-stack {
@@ -161,11 +161,11 @@ samp {
 
 @media (min-width: 768px) {
   :root {
-    --section-spacing: 6rem;
+    --section-spacing: 6.5rem;
   }
 
   .main-shell {
-    padding: 4.5rem 1.5rem 5rem;
+    padding: 4.25rem 1.5rem 5.5rem;
   }
 }
 

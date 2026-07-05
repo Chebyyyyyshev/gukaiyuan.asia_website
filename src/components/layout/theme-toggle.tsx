@@ -1,14 +1,15 @@
 "use client";
 
 import { Monitor, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/cn";
+
+import { useSiteTheme } from "./theme-provider";
 
 const themeCycle = ["system", "light", "dark"] as const;
 
 export function ThemeToggle({ className }: { className?: string }) {
-  const { resolvedTheme, setTheme, theme } = useTheme();
+  const { resolvedTheme, setTheme, theme } = useSiteTheme();
   const currentTheme = theme ?? "system";
   const currentIndex = themeCycle.indexOf(
     currentTheme as (typeof themeCycle)[number],
@@ -35,7 +36,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={label}
       title={label}
       className={cn(
-        "inline-flex size-10 items-center justify-center rounded-[var(--radius-control)] border border-border bg-surface text-text-primary shadow-sm transition-colors hover:border-accent focus-visible:outline-accent",
+        "inline-flex size-10 items-center justify-center rounded-[var(--radius-control)] border border-border bg-surface text-text-primary shadow-sm transition-colors duration-200 hover:border-accent focus-visible:outline-accent",
         className,
       )}
       onClick={() => setTheme(nextTheme)}

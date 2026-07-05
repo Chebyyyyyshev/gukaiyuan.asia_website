@@ -27,12 +27,14 @@ export type FeaturedProject = {
   eyebrow: string;
   title: string;
   description: string;
+  systemLine: string;
   tags: string[];
   href: string;
   actionLabel: string;
   image: {
     src: string;
     alt: string;
+    caption: string;
   };
 };
 

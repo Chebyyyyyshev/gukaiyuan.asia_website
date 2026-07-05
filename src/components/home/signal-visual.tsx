@@ -1,6 +1,9 @@
 export function SignalVisual() {
   return (
-    <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-surface p-4 shadow-[var(--shadow-soft)] md:p-5">
+    <div
+      data-home-signal-visual
+      className="relative overflow-hidden rounded-[var(--radius-card)] border border-border bg-surface p-4 shadow-[var(--shadow-soft)] md:p-5 lg:scale-[1.03]"
+    >
       <div className="mb-4 flex items-center justify-between gap-3 text-xs text-text-secondary">
         <span className="font-medium uppercase text-accent">Signal Space</span>
         <span>Abstract model</span>

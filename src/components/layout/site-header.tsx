@@ -40,7 +40,7 @@ export function SiteHeader() {
       <div className="mx-auto flex min-h-16 w-full max-w-[var(--content-width)] items-center justify-between gap-3 px-4 md:px-6">
         <Link
           href="/"
-          className="rounded-[var(--radius-control)] text-base font-semibold text-text-primary"
+          className="rounded-[var(--radius-control)] text-[15px] font-semibold text-text-primary"
           aria-label={`${siteConfig.name} 首页`}
         >
           {siteConfig.name}
@@ -116,8 +116,8 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(function NavLink(
       aria-current={isActive ? "page" : undefined}
       onClick={onNavigate}
       className={cn(
-        "rounded-[var(--radius-control)] px-3 py-2 text-[0.95rem] font-medium text-text-secondary transition-colors duration-200 hover:bg-elevated hover:text-text-primary",
-        isActive && "bg-elevated text-text-primary ring-1 ring-border",
+        "rounded-[var(--radius-control)] px-3 py-2 text-[14.5px] font-medium text-text-secondary transition-colors duration-200 hover:bg-elevated hover:text-text-primary",
+        isActive && "bg-accent/10 text-text-primary ring-1 ring-accent/20",
         mobile && "flex min-h-11 items-center",
       )}
     >
