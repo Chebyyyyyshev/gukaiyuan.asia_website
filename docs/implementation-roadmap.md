@@ -22,16 +22,25 @@
 
 ## Phase 3: 内容源与迁移管线
 
-- 设计 Markdown 或结构化内容目录。
-- 建立 Projects、Notes、Blog、Research 的内容读取方式。
-- 迁移旧站有效内容，不改写事实。
-- 为旧路径制定可执行重定向。
+- 建立本地 MDX 内容目录：`src/content/notes/`。
+- 建立 Notes 类型定义：`src/types/note.ts`。
+- 建立 TypeScript Notes registry：`src/lib/content/notes.ts`。
+- 完成 Notes 索引页和 7 个静态详情页。
+- 使用 `@next/mdx`、`remark-gfm`、`rehype-slug`、`rehype-autolink-headings`、`rehype-pretty-code` 和 `shiki` 建立构建期 MDX 管线。
+- 完成统一文章排版、代码高亮、代码复制、标题锚点、文章目录、上一篇/下一篇和相关文章。
+- 迁移 7 篇已确认旧站学习笔记，不改写事实。
+- 复制 `legacy-site/pictures/sensors_data.png` 到 `public/images/notes/uart-data-structure.png`，仅用于“数据采集与网关”笔记。
+- 在 `next.config.ts` 中实现 Notes 相关旧路径永久重定向。
+- 更新首页 Knowledge Base 三个入口锚点。
+- 更新内容迁移和路由文档。
 
 ## Phase 4: 页面深化
 
 - 完成 Projects 列表和智能家居 IoT 项目详情页。
-- 完成 Notes 索引和详情页。
 - 完成 About 页面。
+- 视真实内容准备情况完善 Blog 正文。
+- 视真实研究资料准备情况完善 Research 正文。
+- 评估是否需要 Notes 搜索。
 - Research 和 Blog 只在真实内容准备好后完善。
 
 ## Phase 5: SEO 与质量检查

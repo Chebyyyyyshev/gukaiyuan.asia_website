@@ -6,6 +6,7 @@ export default function NotFound() {
   return (
     <div className="page-stack">
       <EmptyState
+        titleAs="h1"
         title="页面不存在"
         description="当前路径没有对应页面。可以返回首页，或通过导航进入 Projects、Notes 和 About。"
       />

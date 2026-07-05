@@ -73,20 +73,20 @@ export const homeContent = {
         description:
           "JavaScript 异步编程、CSS 布局与动效、HTML5 语义化与 SEO。",
         label: "Web Fundamentals",
-        href: "/notes",
+        href: "/notes#web",
       },
       {
         title: "物联网基础",
         description:
           "物联网基础概念、通信协议、系统架构与嵌入式开发板内容。",
         label: "IoT Foundations",
-        href: "/notes",
+        href: "/notes#iot",
       },
       {
         title: "数据采集与网关",
         description: "传感器数据采集、串口通信与网关代码相关说明。",
         label: "Data & Gateway",
-        href: "/notes",
+        href: "/notes#data-gateway",
       },
     ],
   },

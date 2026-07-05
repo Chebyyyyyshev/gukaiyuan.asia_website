@@ -6,7 +6,7 @@
 
 当前分支为 `redesign`，用于新版 Next.js 重构和 Netlify Branch Deploy。`main` 分支对应正式网站，当前仍保留旧版静态网站。
 
-当前 `redesign` 分支已完成工程基础、项目规则、全局布局、主题切换、导航结构、页面骨架，以及第二阶段首页正式视觉设计。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
+当前 `redesign` 分支已完成工程基础、项目规则、全局布局、主题切换、导航结构、页面骨架、第二阶段首页正式视觉设计，以及第三阶段 Notes 内容系统。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
 
 首页已使用已确认的真实内容：
 
@@ -16,7 +16,7 @@
 - 真实项目：智能家居 IoT 系统。
 - 项目截图：从 `legacy-site/pictures/ui-interface.png` 复制到 `public/images/projects/smart-home-interface.png`。
 
-当前仍未迁移 Notes 正文、Blog 正文、Research 详情、项目详情页、搜索、评论、联系表单后端、数据库或管理后台。
+当前已迁移 7 篇确认的 Notes 正文，并建立本地 MDX 管线、Notes registry、索引页、详情页、代码高亮、代码复制、目录、上一篇/下一篇、相关文章和旧路径重定向。Blog 正文、Research 详情、项目详情页、搜索、评论、联系表单后端、数据库或管理后台仍未实现。
 
 ## 技术栈
 
@@ -24,6 +24,9 @@
 - TypeScript
 - Tailwind CSS
 - React Server Components 优先
+- 本地 MDX：`@next/mdx`
+- 构建期代码高亮：`rehype-pretty-code` + `shiki`
+- TypeScript Notes registry
 - next-themes
 - lucide-react
 - npm
@@ -59,14 +62,32 @@ src/
     common/
     home/
     layout/
+    mdx/
+    notes/
     ui/
   config/
+  content/
   lib/
   types/
 docs/
 legacy-site/
 public/
 ```
+
+## Notes 内容系统
+
+Notes 正文位于 `src/content/notes/`，内容索引位于 `src/lib/content/notes.ts`，类型定义位于 `src/types/note.ts`。当前公开的 Notes 路由包括：
+
+- `/notes`
+- `/notes/web/javascript-async-programming`
+- `/notes/web/css-layout-and-animation`
+- `/notes/web/html5-semantics-and-seo`
+- `/notes/iot/fundamentals`
+- `/notes/iot/communication-protocols`
+- `/notes/embedded/development-boards`
+- `/notes/iot/data-acquisition-and-gateway`
+
+旧站 `blogs.html`、三篇 `md/article*.md`、物联网专题和网关代码文档的相关路径已在 `next.config.ts` 中配置永久重定向。当前阶段未迁移智能家居项目章节到 Notes，相关内容保留给 Projects 阶段。
 
 ## legacy-site
 

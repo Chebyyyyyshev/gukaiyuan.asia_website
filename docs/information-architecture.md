@@ -9,6 +9,17 @@
 - `/blog`
 - `/about`
 
+## 已实现 Notes 路由
+
+- `/notes`
+- `/notes/web/javascript-async-programming`
+- `/notes/web/css-layout-and-animation`
+- `/notes/web/html5-semantics-and-seo`
+- `/notes/iot/fundamentals`
+- `/notes/iot/communication-protocols`
+- `/notes/embedded/development-boards`
+- `/notes/iot/data-acquisition-and-gateway`
+
 ## 主导航
 
 当前主导航只展示：
@@ -40,6 +51,8 @@ Research 和 Blog 路由已建立，但在没有真实内容前不显示在主�
 - 物联网协议。
 - 嵌入式与开发板内容。
 - 传感器数据采集说明。
+
+Notes 已通过本地 MDX、TypeScript registry 和静态详情路由实现。当前不包含搜索、评论、阅读量、收藏或用户系统。
 
 ### Blog
 
@@ -73,10 +86,17 @@ Research 和 Blog 路由已建立，但在没有真实内容前不显示在主�
 
 ## 旧路径规划
 
-本阶段只记录计划，不实现完整重定向。
+第三阶段已在 `next.config.ts` 中实现以下永久重定向：
 
 - `/index.html` -> `/`
 - `/blogs.html` -> `/notes`
 - `/contact.html` -> `/about#contact`
-- `/notes/iot/` -> `/notes/iot`
-- 智能家居项目 -> `/projects/smart-home-iot`
+- `/md/article1.md` -> `/notes/web/javascript-async-programming`
+- `/md/article2.md` -> `/notes/web/css-layout-and-animation`
+- `/md/article3.md` -> `/notes/web/html5-semantics-and-seo`
+- `/notes/iot/` -> `/notes/iot/fundamentals`
+- `/notes/iot` -> `/notes/iot/fundamentals`
+- `/notes/iot/index.html` -> `/notes/iot/fundamentals`
+- `/notes/iot/code_gateway.html` -> `/notes/iot/data-acquisition-and-gateway`
+
+智能家居项目详情页和 Projects 内容系统尚未实现，旧站物联网专题中的项目章节暂不迁移到 Notes。

@@ -36,6 +36,36 @@
 - [ ] 不存在路径显示 404 页面。
 - [ ] Research 和 Blog 在无真实内容前不显示在主导航和 Footer。
 
+## 第三阶段 Notes
+
+- [ ] 已安装且仅安装允许的 MDX 相关依赖。
+- [ ] `next.config.ts` 支持 `.md` 和 `.mdx`，且未配置 `output: "export"`。
+- [ ] `mdx-components.tsx` 已建立统一 MDX 组件映射。
+- [ ] Notes registry 位于 `src/lib/content/notes.ts`。
+- [ ] Notes 类型位于 `src/types/note.ts`。
+- [ ] 7 篇 Notes 正文位于 `src/content/notes/`。
+- [ ] `/notes` 索引页显示 Web、IoT、Embedded、Data & Gateway 四组内容。
+- [ ] `/notes/web/javascript-async-programming` 可直接访问。
+- [ ] `/notes/web/css-layout-and-animation` 可直接访问。
+- [ ] `/notes/web/html5-semantics-and-seo` 可直接访问。
+- [ ] `/notes/iot/fundamentals` 可直接访问。
+- [ ] `/notes/iot/communication-protocols` 可直接访问。
+- [ ] `/notes/embedded/development-boards` 可直接访问。
+- [ ] `/notes/iot/data-acquisition-and-gateway` 可直接访问。
+- [ ] 未知 Notes slug 显示自定义 404。
+- [ ] Notes 页面不展示虚构日期、阅读量、阅读时长或作者。
+- [ ] 代码高亮在构建期完成。
+- [ ] 代码复制按钮可键盘操作并有 `aria-label`。
+- [ ] 标题锚点可访问。
+- [ ] 桌面端文章目录可用，移动端隐藏。
+- [ ] 上一篇/下一篇来自 registry 顺序。
+- [ ] 相关文章最多展示 2 篇同分类文章。
+- [ ] `public/images/notes/uart-data-structure.png` 只用于“数据采集与网关”笔记。
+- [ ] 未迁移智能家居项目章节到 Notes。
+- [ ] 未创建搜索、评论、收藏、阅读量、用户系统、数据库或后端。
+- [ ] Notes 相关旧路径重定向可用。
+- [ ] 首页 Knowledge Base 三个入口指向 `/notes#web`、`/notes#iot` 和 `/notes#data-gateway`。
+
 ## 第二阶段首页
 
 - [ ] 首页已替换第一阶段占位内容。
@@ -44,7 +74,7 @@
 - [ ] Signal Visual 使用内联 SVG，且不使用外部图片、Canvas、WebGL 或 3D 库。
 - [ ] Current Focus 三张卡片不是链接，不使用 interactive Card。
 - [ ] Featured Project 使用真实截图 `public/images/projects/smart-home-interface.png`。
-- [ ] Knowledge Base 三张卡片链接到 `/notes`，不虚构分类路由。
+- [ ] Knowledge Base 三张卡片链接到 Notes 分类锚点，不虚构不存在的详情内容。
 - [ ] About CTA 链接到 `/about`，不展示未经确认的联系方式。
 - [ ] 首页只有一个 `h1`。
 - [ ] 首页 section 使用 `aria-labelledby`。

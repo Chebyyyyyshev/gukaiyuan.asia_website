@@ -6,9 +6,15 @@ type EmptyStateProps = {
   title: string;
   description: string;
   className?: string;
+  titleAs?: "h1" | "h2";
 };
 
-export function EmptyState({ title, description, className }: EmptyStateProps) {
+export function EmptyState({
+  title,
+  description,
+  className,
+  titleAs: Heading = "h2",
+}: EmptyStateProps) {
   return (
     <section
       className={cn(
@@ -18,7 +24,7 @@ export function EmptyState({ title, description, className }: EmptyStateProps) {
       aria-label={title}
     >
       <CircleDashed className="mb-4 text-accent" aria-hidden="true" size={24} />
-      <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
+      <Heading className="text-lg font-semibold text-text-primary">{title}</Heading>
       <p className="mt-2 max-w-2xl leading-7">{description}</p>
     </section>
   );
