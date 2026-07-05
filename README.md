@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-当前分支为 `redesign`，用于新版 Next.js 重构和 Netlify Branch Deploy。`main` 分支对应正式网站。
+当前分支为 `redesign`，用于新版 Next.js 重构和 Netlify Branch Deploy。`main` 分支对应正式网站，当前仍保留旧版静态网站。
 
 本阶段已建立工程基础、项目规则、规划文档、全局布局、主题切换、导航结构和页面骨架。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
 
@@ -60,11 +60,15 @@ legacy-site/
 
 `legacy-site/` 保存旧版 HTML/CSS/JavaScript/Markdown/图片内容。它是后续迁移与核对的只读来源，不应在新版开发中直接改写旧站正文。
 
-## 部署关系
+## Netlify 部署关系
 
-- `main`：正式网站分支。
+- `main`：正式网站分支，当前仍是旧版静态站。
 - `redesign`：新版开发分支，对应 Netlify Branch Deploy。
-- 当前阶段依赖 Netlify 对现代 Next.js 的自动识别，不创建 `netlify.toml`，不安装 Netlify 插件，不配置 API Route 或 Functions。
+- 当前 Netlify 项目最初为纯 HTML 静态站创建，旧的 Netlify UI 构建设置不会在架构变为 Next.js 后可靠自动更新。
+- 根目录 `netlify.toml` 明确指定 `npm run build` 和 `.next` 发布目录，用文件配置覆盖 Netlify UI 中可能残留的旧静态站配置。
+- 该配置当前只存在于 `redesign` 分支，不影响 `main` 的旧站部署。
+- 未来新版合并到 `main` 后，正式 Next.js 站点继续使用同一配置。
+- 不安装 `@netlify/plugin-nextjs`，不配置静态导出，不创建不必要的 Functions 或 redirects。
 
 ## 规则文档
 

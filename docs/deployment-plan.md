@@ -2,23 +2,44 @@
 
 ## 当前分支关系
 
-- `main`：正式网站分支。
-- `redesign`：新版开发分支，对应 Netlify Branch Deploy。
+- `main`：正式网站分支，当前仍保留旧版静态网站。
+- `redesign`：新版 Next.js 开发分支，对应 Netlify Branch Deploy。
 
-## Netlify 策略
+## Netlify 项目背景
 
-本项目将通过 Netlify 部署完整 Next.js 应用。
+当前 Netlify 项目最初是为纯 HTML 静态网站创建的。由于站点架构已经从根目录静态 HTML 改为根目录 Next.js 应用，Netlify UI 中原有的构建命令和发布目录不会在架构改变后可靠地自动更新。
 
-当前阶段：
+如果继续沿用旧静态站配置，Branch Deploy 可能发布错误目录，访问时会显示 Netlify 平台自己的通用 404，而不是项目中的 Next.js 404 页面。
+
+## 文件化构建配置
+
+仓库根目录使用 `netlify.toml` 明确声明构建命令和发布目录：
+
+```toml
+[build]
+  command = "npm run build"
+  publish = ".next"
+```
+
+该文件配置会覆盖 Netlify UI 中旧的构建设置，确保 Netlify 对 `redesign` 分支执行 Next.js 构建，并发布 `.next` 目录。
+
+## 当前阶段约束
 
 - 不使用静态导出。
+- 不配置 `output: "export"`。
 - 不安装旧版 Netlify Next.js 插件。
 - 不配置 `@netlify/plugin-nextjs`。
 - 不创建 Netlify Functions。
 - 不创建 API Route。
+- 不添加不必要的 redirects。
 - 不修改 Netlify 后台设置。
 - 不修改域名或 DNS。
-- 不创建 `netlify.toml`，优先依赖 Netlify 对现代 Next.js 的自动识别。
+
+## 分支影响
+
+当前 `netlify.toml` 只存在于 `redesign` 分支，不影响 `main` 分支旧站部署。
+
+当新版 Next.js 站点未来合并到 `main` 后，正式站将继续使用同一份 `netlify.toml`，以 `npm run build` 构建并发布 `.next`。
 
 ## 本地验证
 
@@ -45,6 +66,6 @@ git diff --check
 
 ## 后续待确认
 
-- Netlify Branch Deploy 的具体环境变量和构建设置。
-- 是否需要在后续阶段增加重定向规则。
+- Netlify Branch Deploy 的环境变量是否需要补充。
+- 是否需要在后续阶段增加旧路径重定向规则。
 - 是否需要外部服务承载联系表单。
