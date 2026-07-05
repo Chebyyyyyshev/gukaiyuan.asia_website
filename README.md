@@ -6,7 +6,17 @@
 
 当前分支为 `redesign`，用于新版 Next.js 重构和 Netlify Branch Deploy。`main` 分支对应正式网站，当前仍保留旧版静态网站。
 
-本阶段已建立工程基础、项目规则、规划文档、全局布局、主题切换、导航结构和页面骨架。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
+当前 `redesign` 分支已完成工程基础、项目规则、全局布局、主题切换、导航结构、页面骨架，以及第二阶段首页正式视觉设计。旧站内容已完整归档到 `legacy-site/`，作为后续迁移的只读来源。
+
+首页已使用已确认的真实内容：
+
+- 姓名：顾开元 / Kaiyuan Gu。
+- 身份描述：通信工程方向学生。
+- 关注方向：无线通信、物理层安全、信号处理、嵌入式系统、物联网。
+- 真实项目：智能家居 IoT 系统。
+- 项目截图：从 `legacy-site/pictures/ui-interface.png` 复制到 `public/images/projects/smart-home-interface.png`。
+
+当前仍未迁移 Notes 正文、Blog 正文、Research 详情、项目详情页、搜索、评论、联系表单后端、数据库或管理后台。
 
 ## 技术栈
 
@@ -47,6 +57,7 @@ src/
   app/
   components/
     common/
+    home/
     layout/
     ui/
   config/
@@ -54,6 +65,7 @@ src/
   types/
 docs/
 legacy-site/
+public/
 ```
 
 ## legacy-site

@@ -36,17 +36,17 @@ export function SiteHeader() {
   }, [isOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
       <div className="mx-auto flex min-h-16 w-full max-w-[var(--content-width)] items-center justify-between gap-3 px-4 md:px-6">
         <Link
           href="/"
-          className="rounded-[var(--radius-control)] text-sm font-semibold text-text-primary"
+          className="rounded-[var(--radius-control)] text-base font-semibold text-text-primary"
           aria-label={`${siteConfig.name} 首页`}
         >
           {siteConfig.name}
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="主导航">
+        <nav className="hidden items-center gap-2 md:flex" aria-label="主导航">
           {primaryNavigationItems.map((item) => (
             <NavLink key={item.href} item={item} pathname={pathname} />
           ))}
@@ -60,7 +60,7 @@ export function SiteHeader() {
             aria-label={isOpen ? "关闭导航菜单" : "打开导航菜单"}
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
-            className="inline-flex size-10 items-center justify-center rounded-[var(--radius-control)] border border-border bg-surface text-text-primary shadow-sm transition-colors hover:border-accent md:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-[var(--radius-control)] border border-border bg-surface text-text-primary shadow-sm transition-colors duration-200 hover:border-accent md:hidden"
             onClick={() => setIsOpen((value) => !value)}
           >
             {isOpen ? (
@@ -116,8 +116,8 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(function NavLink(
       aria-current={isActive ? "page" : undefined}
       onClick={onNavigate}
       className={cn(
-        "rounded-[var(--radius-control)] px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:bg-elevated hover:text-text-primary",
-        isActive && "bg-elevated text-text-primary",
+        "rounded-[var(--radius-control)] px-3 py-2 text-[0.95rem] font-medium text-text-secondary transition-colors duration-200 hover:bg-elevated hover:text-text-primary",
+        isActive && "bg-elevated text-text-primary ring-1 ring-border",
         mobile && "flex min-h-11 items-center",
       )}
     >

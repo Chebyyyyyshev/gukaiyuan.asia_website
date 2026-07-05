@@ -1,0 +1,63 @@
+export type HomeLink = {
+  label: string;
+  href: string;
+};
+
+export type HeroContent = {
+  eyebrow: string;
+  name: {
+    zh: string;
+    en: string;
+  };
+  title: string[];
+  description: string;
+  actions: HomeLink[];
+  focusLabel: string;
+  focusText: string;
+};
+
+export type FocusItem = {
+  title: string;
+  description: string;
+  label: string;
+  icon: "radio" | "shield" | "cpu";
+};
+
+export type FeaturedProject = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+  actionLabel: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+};
+
+export type KnowledgeCategory = {
+  title: string;
+  description: string;
+  label: string;
+  href: string;
+};
+
+export type AboutCtaContent = {
+  title: string[];
+  description: string;
+  action: HomeLink;
+};
+
+export type HomeContent = {
+  hero: HeroContent;
+  focusItems: FocusItem[];
+  featuredProject: FeaturedProject;
+  knowledge: {
+    title: string;
+    eyebrow: string;
+    description: string;
+    categories: KnowledgeCategory[];
+  };
+  aboutCta: AboutCtaContent;
+};

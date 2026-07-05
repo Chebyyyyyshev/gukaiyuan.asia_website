@@ -20,7 +20,7 @@ export function Card({
       className={cn(
         "rounded-[var(--radius-card)] border border-border bg-surface p-5 shadow-[var(--shadow-soft)]",
         variant === "interactive" &&
-          "transition-colors hover:border-accent focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/30",
+          "transition-[border-color,background-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-elevated focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/30",
         className,
       )}
       {...props}
@@ -31,12 +31,20 @@ export function Card({
 }
 
 export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("grid gap-2", className)} {...props} />;
+  return <div className={cn("grid gap-3", className)} {...props} />;
 }
 
-export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
+type CardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
+  as?: "h2" | "h3" | "h4";
+};
+
+export function CardTitle({
+  as: Comp = "h2",
+  className,
+  ...props
+}: CardTitleProps) {
   return (
-    <h2
+    <Comp
       className={cn("text-lg font-semibold leading-7 text-text-primary", className)}
       {...props}
     />

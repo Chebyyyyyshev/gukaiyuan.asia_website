@@ -10,11 +10,13 @@
   --border: rgba(15, 23, 42, 0.12);
   --accent: #4f8cff;
   --accent-strong: #2563eb;
+  --accent-muted: color-mix(in srgb, var(--accent) 12%, transparent);
   --shadow-soft: 0 18px 48px rgba(15, 23, 42, 0.08);
   --radius-card: 0.75rem;
   --radius-control: 0.5rem;
   --content-width: 1200px;
   --article-width: 760px;
+  --section-spacing: 4rem;
 }
 
 .dark {
@@ -27,6 +29,7 @@
   --border: rgba(255, 255, 255, 0.08);
   --accent: #4f8cff;
   --accent-strong: #7aa7ff;
+  --accent-muted: color-mix(in srgb, var(--accent) 16%, transparent);
   --shadow-soft: 0 20px 56px rgba(0, 0, 0, 0.32);
 }
 
@@ -49,7 +52,7 @@
 
 html {
   min-width: 320px;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -111,6 +114,21 @@ button {
   gap: 1.5rem;
 }
 
+.home-stack {
+  display: grid;
+  gap: var(--section-spacing);
+}
+
+.home-section {
+  min-width: 0;
+}
+
+.signal-visual-pulse {
+  stroke: color-mix(in srgb, var(--accent) 58%, transparent);
+  stroke-dasharray: 18 180;
+  animation: signal-pulse 5s ease-in-out infinite;
+}
+
 .skip-link {
   position: fixed;
   top: 0.75rem;
@@ -142,8 +160,31 @@ samp {
 }
 
 @media (min-width: 768px) {
+  :root {
+    --section-spacing: 6rem;
+  }
+
   .main-shell {
     padding: 4.5rem 1.5rem 5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --section-spacing: 7rem;
+  }
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    stroke-dashoffset: 120;
+    opacity: 0.18;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 0.58;
   }
 }
 
@@ -155,5 +196,10 @@ samp {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .signal-visual-pulse {
+    animation: none !important;
+    opacity: 0.3;
   }
 }

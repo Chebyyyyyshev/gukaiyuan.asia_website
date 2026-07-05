@@ -45,7 +45,7 @@ export const navigationItems: NavItem[] = [
   {
     title: "About",
     href: "/about",
-    description: "个人介绍与公开联系方式",
+    description: "个人介绍与网站说明",
     showInPrimaryNav: true,
     showInFooter: true,
   },
