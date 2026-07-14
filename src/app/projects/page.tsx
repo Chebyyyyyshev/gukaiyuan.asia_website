@@ -1,22 +1,14 @@
-import type { Metadata } from "next";
-
 import { PageHeader } from "@/components/common/page-header";
 import { ProjectCard } from "@/components/projects/project-card";
+import { profileConfig } from "@/config/site";
 import { getAllProjects } from "@/lib/content/projects";
+import { createPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "项目与实践 | 顾开元",
-  },
-  description:
-    "顾开元的项目与工程实践，记录物联网、嵌入式系统、数据采集与通信网关相关实现。",
-  openGraph: {
-    title: "项目与实践 | 顾开元",
-    description:
-      "顾开元的项目与工程实践，记录物联网、嵌入式系统、数据采集与通信网关相关实现。",
-    type: "website",
-  },
-};
+export const metadata = createPageMetadata({
+  title: "项目与实践",
+  description: `${profileConfig.name}的项目与工程实践，记录物联网、嵌入式系统、数据采集与通信网关相关实现。`,
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   const projects = getAllProjects();

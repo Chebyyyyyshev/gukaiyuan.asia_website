@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.name}`,
+    template: siteConfig.titleTemplate,
   },
   description: siteConfig.description,
   icons: {
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
+    locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: siteConfig.title,

@@ -26,6 +26,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               src={metadata.coverImage}
               alt={metadata.coverAlt}
               fill
+              loading="eager"
               sizes="(min-width: 1024px) 430px, 100vw"
               className="object-contain p-3"
             />

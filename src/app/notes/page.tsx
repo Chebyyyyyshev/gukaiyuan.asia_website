@@ -1,25 +1,17 @@
-import type { Metadata } from "next";
-
 import { PageHeader } from "@/components/common/page-header";
 import { NoteCard } from "@/components/notes/note-card";
+import { profileConfig } from "@/config/site";
 import {
   getNotesByCategory,
   noteCategoryGroups,
 } from "@/lib/content/notes";
+import { createPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "技术知识库 | 顾开元",
-  },
-  description:
-    "顾开元整理的技术笔记，涵盖前端基础、物联网、嵌入式系统、数据采集与通信网关。",
-  openGraph: {
-    title: "技术知识库 | 顾开元",
-    description:
-      "顾开元整理的技术笔记，涵盖前端基础、物联网、嵌入式系统、数据采集与通信网关。",
-    type: "website",
-  },
-};
+export const metadata = createPageMetadata({
+  title: "技术知识库",
+  description: `${profileConfig.name}整理的技术笔记，涵盖前端基础、物联网、嵌入式系统、数据采集与通信网关。`,
+  path: "/notes",
+});
 
 export default function NotesPage() {
   return (

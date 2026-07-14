@@ -36,6 +36,32 @@
 - [ ] 不存在路径显示 404 页面。
 - [ ] Research 和 Blog 在无真实内容前不显示在主导航和 Footer。
 
+## 第五阶段 About 与 SEO
+
+- [ ] 个人资料类型位于 `src/types/profile.ts`，公开字段集中在 `src/config/site.ts`。
+- [ ] 姓名、英文名、身份、简介、关注方向、邮箱、GitHub、学校和所在地均来自用户确认信息。
+- [ ] 微信与简历未配置且不渲染，不显示任何占位符。
+- [ ] `/about` 只有一个 `h1`，标题层级连续。
+- [ ] About 包含 Profile Summary、What I Build、Current Archive、Website Principles 与 Contact。
+- [ ] Current Archive 的项目数和笔记数来自 Projects 与 Notes registry。
+- [ ] Blog 和 Research 在 About 中只有非链接说明，没有空入口或 Coming soon 卡片。
+- [ ] Contact 包含 `id="contact"`，邮箱使用 `mailto:`，GitHub 使用新窗口和安全 `rel`。
+- [ ] Header 与 Footer 使用统一资料和导航配置。
+- [ ] Footer 只显示已启用导航与确认过的 Email、GitHub，年份动态生成。
+- [ ] `/contact.html` 永久重定向到 `/about#contact`，且本地最终 URL 与焦点区域正确。
+- [ ] 根 metadataBase 为 `https://gukaiyuan.asia`。
+- [ ] 默认 title、title template 与 description 符合第五阶段要求，页面标题不重复站点名。
+- [ ] 公开页面都包含正式域名 canonical、Open Graph 与 `summary` Twitter Card。
+- [ ] 不存在全站默认 OG 图片或虚构 Twitter/X 账号。
+- [ ] Person JSON-LD 只包含确认过的姓名、英文名、URL、简介、GitHub 和公开邮箱。
+- [ ] `/sitemap.xml` 包含 4 个固定公开页面、1 个项目详情和 7 个 Notes 详情。
+- [ ] sitemap 不包含 Blog、Research、404、legacy-site、预览域名或未知 slug。
+- [ ] `/robots.txt` 允许抓取公开页面，并指向正式域名 sitemap 与 host。
+- [ ] Blog 与 Research 保持空状态，不进入 Header、Footer、About 主动链接或 sitemap。
+- [ ] 320px、375px、768px、1024px、1440px、1920px 无横向滚动。
+- [ ] Contact 在移动端为单列，长邮箱和 GitHub URL 不撑破布局。
+- [ ] 深浅主题、skip link、focus-visible、移动导航焦点与 reduced motion 正常。
+
 ## 第四阶段 Projects
 
 - [ ] Projects registry 位于 `src/lib/content/projects.ts`。

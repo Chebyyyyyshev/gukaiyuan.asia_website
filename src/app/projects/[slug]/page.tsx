@@ -10,6 +10,7 @@ import {
   getProjectStaticParams,
   getRelatedNotesForProject,
 } from "@/lib/content/projects";
+import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const dynamicParams = false;
 
@@ -34,29 +35,17 @@ export async function generateMetadata({
   }
 
   const { metadata } = project;
-  const url = `/projects/${metadata.slug}`;
 
-  return {
-    title: {
-      absolute: `${metadata.title} | 顾开元`,
-    },
+  return createPageMetadata({
+    title: metadata.title,
     description: metadata.summary,
-    alternates: {
-      canonical: url,
+    path: `/projects/${metadata.slug}`,
+    type: "article",
+    image: {
+      url: metadata.coverImage,
+      alt: metadata.coverAlt,
     },
-    openGraph: {
-      title: `${metadata.title} | 顾开元`,
-      description: metadata.summary,
-      type: "article",
-      url,
-      images: [
-        {
-          url: metadata.coverImage,
-          alt: metadata.coverAlt,
-        },
-      ],
-    },
-  };
+  });
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {

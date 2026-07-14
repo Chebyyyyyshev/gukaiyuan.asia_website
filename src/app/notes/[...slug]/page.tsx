@@ -11,6 +11,7 @@ import {
   getNoteStaticParams,
   getRelatedNotes,
 } from "@/lib/content/notes";
+import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const dynamicParams = false;
 
@@ -35,23 +36,13 @@ export async function generateMetadata({
   }
 
   const { metadata } = note;
-  const url = `/notes/${metadata.slug}`;
 
-  return {
-    title: {
-      absolute: `${metadata.title} | 顾开元`,
-    },
+  return createPageMetadata({
+    title: metadata.title,
     description: metadata.summary,
-    alternates: {
-      canonical: url,
-    },
-    openGraph: {
-      title: `${metadata.title} | 顾开元`,
-      description: metadata.summary,
-      type: "article",
-      url,
-    },
-  };
+    path: `/notes/${metadata.slug}`,
+    type: "article",
+  });
 }
 
 export default async function NoteDetailPage({ params }: NotePageProps) {

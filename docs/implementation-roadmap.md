@@ -46,20 +46,22 @@
 - 更新首页 Featured Project 链接到项目详情页。
 - 在三篇相关 Notes 中加入项目交叉链接。
 - 记录项目迁移状态与人工核查项。
-- 完成 About 页面。
-- 视真实内容准备情况完善 Blog 正文。
-- 视真实研究资料准备情况完善 Research 正文。
-- 评估是否需要 Notes 搜索。
-- Research 和 Blog 只在真实内容准备好后完善。
 
-## Phase 5: SEO 与质量检查
+## Phase 5: About、SEO 与质量检查
 
-- 增加 sitemap、robots、canonical、Open Graph。
-- 增加链接检查和页面 smoke test。
-- 检查移动端、深浅主题、键盘导航和可访问性。
+- 建立类型安全的个人资料与公开联系方式配置。
+- 完成 About 页面、Contact 区域与 registry 实时内容数量。
+- 在 Header 与 Footer 使用统一个人资料配置。
+- 保留 `/contact.html` 到 `/about#contact` 的永久重定向并验证本地行为。
+- 增加 sitemap、robots、canonical、Open Graph、Twitter Card 与 Person JSON-LD。
+- 检查公开页面 title、description、h1、canonical、图片和内部链接。
+- 检查 320px 到 1920px、深浅主题、键盘导航和可访问性。
+- 不实现联系表单后端、Blog 正文、Research 正文、搜索、RSS 或 Analytics。
 
 ## Phase 6: 发布准备
 
 - 在 Netlify Branch Deploy 验证。
 - 人工核对旧站路径和内容迁移。
 - 确认生产切换计划。
+
+Blog、Research 与 Notes 搜索仅在真实内容或明确需求准备完成后进入后续阶段。

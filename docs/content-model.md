@@ -1,6 +1,6 @@
 # Content Model
 
-本文档记录新版内容模型。第三阶段已实现 Notes 的本地 MDX 内容系统；第四阶段已实现 Projects 的本地 MDX 内容系统。Blog、Research 仍只保留模型规划，不迁移正文。
+本文档记录新版内容模型。第三阶段已实现 Notes 的本地 MDX 内容系统；第四阶段已实现 Projects 的本地 MDX 内容系统；第五阶段已实现类型安全的个人资料配置、About 页面与 SEO 路由。Blog、Research 仍只保留模型规划，不迁移正文。
 
 ## Project
 
@@ -115,10 +115,29 @@ Research 必须基于真实研究资料。当前不创建具体研究条目。
 
 ## About
 
-- displayName
-- bio
+- name
+- englishName
+- role
+- shortBio
 - focusAreas
-- contacts
-- socialLinks
+- email?
+- githubUrl?
+- wechatId?
+- wechatQrImage?
+- school?
+- location?
+- resumeUrl?
 
-未提供的个人信息不得用占位符替代展示。
+已实现位置：
+
+- 统一配置：`src/config/site.ts`
+- 类型：`src/types/profile.ts`
+- 页面：`src/app/about/page.tsx`
+- 组件：`src/components/about/`
+- Person JSON-LD：`src/components/seo/person-json-ld.tsx`
+
+当前公开姓名、英文名、身份、简介、关注方向、邮箱、GitHub、学校和所在地。微信与简历字段未配置，因此组件完全不渲染对应内容。手机号、家庭地址和未确认社交账号不属于当前模型，不得从旧站占位符或仓库信息推断。
+
+## SEO
+
+公开页面 metadata 通过 `src/lib/seo/metadata.ts` 统一生成，包含 title、description、canonical、Open Graph 和 Twitter Card。固定公开页面来自导航配置，项目与笔记详情路径来自各自 registry；sitemap 不手写项目数、笔记数或未知 slug。

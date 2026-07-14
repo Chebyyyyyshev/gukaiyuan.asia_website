@@ -4,15 +4,17 @@ export type NavItem = {
   description: string;
   showInPrimaryNav: boolean;
   showInFooter: boolean;
+  includeInSitemap: boolean;
 };
 
 export const navigationItems: NavItem[] = [
   {
     title: "Home",
     href: "/",
-    description: "新版首页骨架",
+    description: "个人主页",
     showInPrimaryNav: true,
     showInFooter: true,
+    includeInSitemap: true,
   },
   {
     title: "Projects",
@@ -20,6 +22,7 @@ export const navigationItems: NavItem[] = [
     description: "项目作品集",
     showInPrimaryNav: true,
     showInFooter: true,
+    includeInSitemap: true,
   },
   {
     title: "Research",
@@ -27,6 +30,7 @@ export const navigationItems: NavItem[] = [
     description: "科研档案，等待真实内容补充",
     showInPrimaryNav: false,
     showInFooter: false,
+    includeInSitemap: false,
   },
   {
     title: "Notes",
@@ -34,6 +38,7 @@ export const navigationItems: NavItem[] = [
     description: "技术知识库",
     showInPrimaryNav: true,
     showInFooter: true,
+    includeInSitemap: true,
   },
   {
     title: "Blog",
@@ -41,13 +46,15 @@ export const navigationItems: NavItem[] = [
     description: "叙事型文章与阶段总结，等待内容迁移",
     showInPrimaryNav: false,
     showInFooter: false,
+    includeInSitemap: false,
   },
   {
     title: "About",
     href: "/about",
-    description: "个人介绍与网站说明",
+    description: "个人介绍、网站说明与公开联系方式",
     showInPrimaryNav: true,
     showInFooter: true,
+    includeInSitemap: true,
   },
 ];
 
@@ -57,4 +64,8 @@ export const primaryNavigationItems = navigationItems.filter(
 
 export const footerNavigationItems = navigationItems.filter(
   (item) => item.showInFooter,
+);
+
+export const sitemapNavigationItems = navigationItems.filter(
+  (item) => item.includeInSitemap,
 );

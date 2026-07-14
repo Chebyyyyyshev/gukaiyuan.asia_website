@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 import { primaryNavigationItems } from "@/config/navigation";
-import { siteConfig } from "@/config/site";
+import { profileConfig } from "@/config/site";
 import { cn } from "@/lib/cn";
 
 import { ThemeToggle } from "./theme-toggle";
@@ -40,10 +40,13 @@ export function SiteHeader() {
       <div className="mx-auto flex min-h-16 w-full max-w-[var(--content-width)] items-center justify-between gap-3 px-4 md:px-6">
         <Link
           href="/"
-          className="rounded-[var(--radius-control)] text-[15px] font-semibold text-text-primary"
-          aria-label={`${siteConfig.name} 首页`}
+          className="flex min-w-0 items-baseline gap-2 rounded-[var(--radius-control)] text-[15px] font-semibold text-text-primary"
+          aria-label={`${profileConfig.name} 首页`}
         >
-          {siteConfig.name}
+          <span>{profileConfig.name}</span>
+          <span className="hidden text-xs font-medium text-text-secondary lg:inline">
+            {profileConfig.englishName}
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-2 md:flex" aria-label="主导航">

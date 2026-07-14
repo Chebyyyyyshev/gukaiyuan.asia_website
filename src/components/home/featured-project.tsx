@@ -68,6 +68,7 @@ export function FeaturedProject() {
                   src={metadata.coverImage}
                   alt={metadata.coverAlt}
                   fill
+                  loading="eager"
                   sizes="(min-width: 1024px) 660px, 100vw"
                   className="object-contain p-3"
                 />

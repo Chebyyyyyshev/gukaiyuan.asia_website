@@ -1,15 +1,15 @@
+import { profileConfig } from "@/config/site";
 import type { HomeContent } from "@/types/home";
 
 export const homeContent = {
   hero: {
     eyebrow: "COMMUNICATION · RESEARCH · ENGINEERING",
     name: {
-      zh: "顾开元",
-      en: "Kaiyuan Gu",
+      zh: profileConfig.name,
+      en: profileConfig.englishName,
     },
     title: ["在通信、算法与系统之间，", "持续构建可验证的成果。"],
-    description:
-      "通信工程方向学生，关注无线通信、物理层安全、信号处理与嵌入式系统。这里记录项目实践、研究过程与长期维护的技术笔记。",
+    description: `${profileConfig.shortBio}这里记录项目实践、研究过程与长期维护的技术笔记。`,
     actions: [
       {
         label: "查看项目",

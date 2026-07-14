@@ -25,6 +25,13 @@
 - `/projects`
 - `/projects/smart-home-iot`
 
+## 已实现 About 与 SEO 路由
+
+- `/about`
+- `/about#contact`
+- `/sitemap.xml`
+- `/robots.txt`
+
 ## 主导航
 
 当前主导航只展示：
@@ -83,17 +90,17 @@ Notes 已通过本地 MDX、TypeScript registry 和静态详情路由实现。�
 
 ### About
 
-- 个人介绍。
-- 技术方向。
-- 联系方式。
-- GitHub。
-- 网站说明。
+- 已确认的个人介绍、身份和技术方向。
+- 已确认的学校与所在地。
+- 当前 Projects 与 Notes registry 的真实内容数量。
+- 网站内容边界与维护原则。
+- 已确认的公开邮箱和 GitHub。
 
-真实联系方式尚未在本任务中提供，因此不展示假邮箱、假微信或假社交账号。
+微信与简历未获公开授权，因此完全不显示。About 不主动链接空 Blog 或 Research；这两个栏目只有说明文字，没有可点击空入口。
 
 ## 旧路径规划
 
-第三阶段已在 `next.config.ts` 中实现以下永久重定向：
+`next.config.ts` 已实现以下永久重定向：
 
 - `/index.html` -> `/`
 - `/blogs.html` -> `/notes`

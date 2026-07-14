@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
+
 import { EmptyState } from "@/components/common/empty-state";
 import { PageHeader } from "@/components/common/page-header";
+
+export const metadata: Metadata = {
+  title: "Research",
+  description: "Research 栏目尚未公开正式研究内容。",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function ResearchPage() {
   return (

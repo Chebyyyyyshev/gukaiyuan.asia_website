@@ -1,5 +1,16 @@
+import type { Metadata } from "next";
+
 import { EmptyState } from "@/components/common/empty-state";
 import { PageHeader } from "@/components/common/page-header";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Blog 栏目尚未公开正式文章。",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function BlogPage() {
   return (

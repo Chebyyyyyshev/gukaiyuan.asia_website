@@ -26,7 +26,16 @@
 | `/projects` | 项目与实践索引 | Projects registry |
 | `/projects/smart-home-iot` | 智能家居 IoT 系统 | `legacy-site/notes/iot/index.html#chapter4-1` 到 `#chapter4-4`；`legacy-site/notes/iot/code_gateway.md`；`legacy-site/pictures/ui-interface.png` |
 
-第三阶段已在 `next.config.ts` 中实现永久重定向：
+## 0.2 第五阶段已落地 About 与 SEO 路由
+
+| 新路由 | 内容 | 数据来源 |
+| --- | --- | --- |
+| `/about` | 个人资料、内容边界、当前档案、网站原则和公开联系方式 | `src/config/site.ts`、Projects registry、Notes registry |
+| `/about#contact` | About 页内 Contact 区域 | 用户确认的公开邮箱与 GitHub |
+| `/sitemap.xml` | 4 个固定公开页面、1 个项目详情与 7 个 Notes 详情 | 导航配置、Projects registry、Notes registry |
+| `/robots.txt` | 正式域名抓取规则 | `src/config/site.ts` |
+
+`next.config.ts` 已实现以下永久重定向：
 
 | 旧路径 | 新路径 |
 | --- | --- |
@@ -51,7 +60,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | `index.html` | `/`、`/index.html` | 关于 - 技术空间 | 当前首页/关于页 | 主导航“关于”；其他主站页面和物联网页返回首页 | 无 | `/` 作为 Home；详细个人介绍迁入 `/about` |
 | `blogs.html` | `/blogs.html` | 博客 - 技术空间 | 博客列表和 Markdown 文章阅读容器 | 主导航“博客”；物联网子页返回博客 | 点击按钮加载 `md/article1.md`、`md/article2.md`、`md/article3.md` | 第三阶段已将旧 `/blogs.html` 重定向到 `/notes`；旧站三篇前端文章已作为 Notes 迁移 |
-| `contact.html` | `/contact.html` | 联系 - 技术空间 | 联系方式与留言表单演示 | 主导航“联系”；物联网专题页顶部导航 | 表单提交由 `js/app.js` 前端拦截，仅显示提示 | 不建议保留独立 Contact；迁到 `/about#contact`，旧路径重定向 |
+| `contact.html` | `/contact.html` | 联系 - 技术空间 | 联系方式与留言表单演示 | 主导航“联系”；物联网专题页顶部导航 | 表单提交由 `js/app.js` 前端拦截，仅显示提示 | 第五阶段已迁到 `/about#contact`；不迁移无后端能力的旧留言表单 |
 | `notes/iot/index.html` | `/notes/iot/`、`/notes/iot/index.html` | 物联网学习记录 \| GUKAIYUAN.ASIA | 物联网专题、学习笔记和智能家居项目内容 | `blogs.html` 的“进入专题”；自身顶部导航 | 内联 JS 控制侧边目录、锚点滚动、高亮和移动端目录 | 第三阶段已拆分学习笔记到 Notes 详情路由；第四阶段已将智能家居项目迁入 `/projects/smart-home-iot` |
 | `notes/iot/code_gateway.html` | `/notes/iot/code_gateway.html?file=code_gateway.md` | 代码文档 - 物联网学习 | 通过 URL 参数渲染代码 Markdown | `notes/iot/index.html` 中“查看完整代码” | 读取 `file` 参数，只允许加载 `code_gateway.md` | 第三阶段已重定向到 `/notes/iot/data-acquisition-and-gateway`，作为旧站保留的实现片段展示；第四阶段已从项目页交叉链接 |
 
@@ -103,6 +112,8 @@
 | --- | --- | --- |
 | `https://github.com/yourname` | HTTP 可访问 | 但明显是占位用户名，不能确认属于站点作者 |
 
+旧站占位 GitHub 不迁移。新版只使用用户已确认的 `https://github.com/Chebyyyyyshev`，并集中配置在 `src/config/site.ts`。
+
 ## 5. 没有普通导航入口的内容
 
 | 内容 | 当前入口状态 | 迁移注意 |
@@ -120,7 +131,7 @@
 | `/` | `/` | 保留为 Home |
 | `/index.html` | `/` | 301 或静态重定向到 Home |
 | `/blogs.html` | `/notes` | 已在 `next.config.ts` 实现永久重定向 |
-| `/contact.html` | `/about#contact` | 旧路径重定向 |
+| `/contact.html` | `/about#contact` | 已在 `next.config.ts` 实现 308 永久重定向；本地最终 URL 保留 `#contact`，不使用客户端跳转或 `_redirects` |
 | `/notes/iot` | `/notes/iot/fundamentals` | 已在 `next.config.ts` 实现永久重定向 |
 | `/notes/iot/` | `/notes/iot/fundamentals` | 已在 `next.config.ts` 实现永久重定向 |
 | `/notes/iot/index.html` | `/notes/iot/fundamentals` | 已在 `next.config.ts` 实现永久重定向 |
@@ -135,17 +146,17 @@
 
 | 新版栏目 | 迁入内容 |
 | --- | --- |
-| Home | 简短个人定位、最新项目/文章入口、Projects/Research/Notes/Blog/About 导航 |
+| Home | 简短个人定位、真实项目入口、Notes 分类入口与 About 入口；主导航只启用 Home、Projects、Notes、About |
 | Projects | 智能家居/IoT 项目、项目目标、环境、系统设计、成果截图、网关代码文档入口；当前已实现 `/projects/smart-home-iot` |
 | Research | 当前仓库没有明确科研论文、课题、发表物或实验记录；需人工补充 |
 | Notes | 物联网基础、通信协议、嵌入式开发、JavaScript/CSS/HTML/SEO 知识条目 |
 | Blog | 项目复盘、阶段总结、普通技术文章；当前 3 篇前端文章更偏 Notes，但也可改写为 Blog |
-| About | 个人介绍、真实联系方式、站点说明 |
+| About | 已确认的个人介绍、技术方向、学校、所在地、真实联系方式、当前内容档案与站点说明 |
 
 ## 8. 待确认项
 
 - 3 篇前端文章最终放 Notes 还是 Blog。
 - 物联网专题中的智能家居项目是否可以公开所有硬件、平台、IP、截图信息。
 - `code_gateway.md` 是否是完整代码，是否有许可证或来源约束。
-- `/contact.html` 到 `/about#contact` 的 hash 重定向在生产环境中的最终表现。
+- `/contact.html` 在第五阶段本地验证为 `308 Permanent Redirect`，`Location` 为 `/about#contact`，浏览器最终 URL 和页面锚点均正确；未来生产切换前仍需在 Netlify 正式环境复核同一行为。
 - 是否需要为旧图片路径提供兼容访问或额外重定向。
